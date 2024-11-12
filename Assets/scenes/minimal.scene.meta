@@ -1,0 +1,19 @@
+{
+  "publish": {
+    "Enabled": false,
+    "ProjectConfig": {
+      "Title": "minimal",
+      "Type": "asset",
+      "Org": "local",
+      "Ident": "minimal",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Metadata": {
+        "SingleAssetSource": "scenes/minimal.scene"
+      }
+    }
+  }
+}

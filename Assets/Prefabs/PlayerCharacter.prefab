@@ -1,0 +1,337 @@
+{
+  "RootObject": {
+    "__guid": "681f59f7-07be-4855-818e-e559cfacd673",
+    "Flags": 0,
+    "Name": "playercharacter",
+    "Enabled": true,
+    "Children": [
+      {
+        "__guid": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
+        "Flags": 0,
+        "Name": "Player",
+        "Tags": "player",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.CapsuleCollider",
+            "__guid": "123ababf-59ad-4f24-8ade-64225fc7ccc0",
+            "End": "0,0,45",
+            "IsTrigger": false,
+            "Radius": 15,
+            "Start": "0,0,15",
+            "Static": false,
+            "SurfaceVelocity": "0,0,0"
+          },
+          {
+            "__type": "PlayerCharacter",
+            "__guid": "f78fcd24-97f6-4e4b-a5a7-4a7809c5d1a3",
+            "arrows": {
+              "_type": "gameobject",
+              "go": "5e13407b-249a-49b8-bd1f-ed6293174dbd"
+            },
+            "camera": {
+              "_type": "component",
+              "component_id": "aa0f24ba-62a5-487f-8c6d-9ffa6c57de03",
+              "go": "645d6e83-7186-4f31-8a52-97ffb53f67bd",
+              "component_type": "CameraComponent"
+            },
+            "capsuleCollider": {
+              "_type": "component",
+              "component_id": "123ababf-59ad-4f24-8ade-64225fc7ccc0",
+              "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
+              "component_type": "CapsuleCollider"
+            },
+            "forwardArrow": {
+              "_type": "gameobject",
+              "go": "ed13354c-03d8-4149-9c2c-2d80a9f63097"
+            },
+            "rightArrow": {
+              "_type": "gameobject",
+              "go": "5281fb30-d5ba-4486-95dd-03790287f324"
+            },
+            "rigid": {
+              "_type": "component",
+              "component_id": "7bbfdcb0-0913-4f13-97fc-4830431ed902",
+              "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
+              "component_type": "Rigidbody"
+            },
+            "speed": 1
+          },
+          {
+            "__type": "Sandbox.Rigidbody",
+            "__guid": "7bbfdcb0-0913-4f13-97fc-4830431ed902",
+            "AngularDamping": 0.1,
+            "Gravity": true,
+            "LinearDamping": 0.1,
+            "Locking": {
+              "Pitch": true,
+              "Yaw": true,
+              "Roll": true
+            },
+            "MassCenterOverride": "0,0,0",
+            "MassOverride": 0,
+            "MotionEnabled": true,
+            "OverrideMassCenter": false,
+            "RigidbodyFlags": "DisableCollisionSounds",
+            "StartAsleep": false
+          },
+          {
+            "__type": "Sandbox.SoundPointComponent",
+            "__guid": "30fd5de7-4c18-4c1e-84c8-f127793f4168",
+            "Distance": 512,
+            "DistanceAttenuation": false,
+            "DistanceAttenuationOverride": false,
+            "Falloff": [
+              {
+                "y": 1,
+                "in": 3.1415927,
+                "out": -3.1415927
+              },
+              {
+                "x": 1
+              }
+            ],
+            "Force2d": false,
+            "MaxRepeatTime": 1,
+            "MinRepeatTime": 1,
+            "Occlusion": false,
+            "OcclusionOverride": false,
+            "OcclusionRadius": 32,
+            "Pitch": 1,
+            "PlayOnStart": false,
+            "ReflectionOverride": false,
+            "Reflections": false,
+            "Repeat": false,
+            "SoundEvent": "sounds/footsteps/footstep-concrete.sound",
+            "SoundOverride": false,
+            "StopOnNew": false,
+            "TargetMixer": {
+              "Name": "master",
+              "Id": "d6205296-4cf8-4e95-869c-2bee92f85122"
+            },
+            "Volume": 1
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "d79c3909-f1ee-4f30-aacb-63fc3788f654",
+            "Flags": 0,
+            "Name": "PlayerMesh",
+            "Scale": "0.6,0.6,0.6",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.SkinnedModelRenderer",
+                "__guid": "f33d0930-a8a2-4052-ae00-a7922d9564f1",
+                "AnimationGraph": "animgraphs/sk_sonicrig.vanmgrph",
+                "BodyGroups": 18446744073709551615,
+                "CreateAttachments": false,
+                "CreateBoneObjects": false,
+                "Model": "characters/sk_sonicrig.vmdl",
+                "Morphs": {},
+                "Parameters": {
+                  "bools": {},
+                  "ints": {},
+                  "floats": {
+                    "move_speed": 0
+                  },
+                  "vectors": {},
+                  "rotations": {}
+                },
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
+                "RenderType": "On",
+                "Tint": "1,1,1,1",
+                "UseAnimGraph": true
+              },
+              {
+                "__type": "SonicTest",
+                "__guid": "c1478cab-4e9f-44b4-b94b-7894bb7abc65",
+                "Model": {
+                  "_type": "component",
+                  "component_id": "f33d0930-a8a2-4052-ae00-a7922d9564f1",
+                  "go": "d79c3909-f1ee-4f30-aacb-63fc3788f654",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "parent": {
+                  "_type": "gameobject",
+                  "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f"
+                },
+                "rigid": {
+                  "_type": "component",
+                  "component_id": "7bbfdcb0-0913-4f13-97fc-4830431ed902",
+                  "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
+                  "component_type": "Rigidbody"
+                },
+                "soundPoint": {
+                  "_type": "component",
+                  "component_id": "30fd5de7-4c18-4c1e-84c8-f127793f4168",
+                  "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
+                  "component_type": "SoundPointComponent"
+                }
+              }
+            ]
+          },
+          {
+            "__guid": "5e13407b-249a-49b8-bd1f-ed6293174dbd",
+            "Flags": 0,
+            "Name": "MovementArrows",
+            "Position": "0.000005722046,0,32",
+            "Enabled": true,
+            "Children": [
+              {
+                "__guid": "ed13354c-03d8-4149-9c2c-2d80a9f63097",
+                "Flags": 0,
+                "Name": "Forward",
+                "Position": "55,0,0",
+                "Rotation": "0,-0.7071067,0,0.7071068",
+                "Enabled": true,
+                "Components": [
+                  {
+                    "__type": "Sandbox.ModelRenderer",
+                    "__guid": "b1a11029-9fdf-4b25-b818-4c71aad85850",
+                    "BodyGroups": 18446744073709551615,
+                    "CreateAttachments": false,
+                    "Model": "models/arrow.vmdl",
+                    "RenderOptions": {
+                      "GameLayer": true,
+                      "OverlayLayer": false,
+                      "BloomLayer": false,
+                      "AfterUILayer": false
+                    },
+                    "RenderType": "On",
+                    "Tint": "1,1,1,1"
+                  }
+                ]
+              },
+              {
+                "__guid": "5281fb30-d5ba-4486-95dd-03790287f324",
+                "Flags": 0,
+                "Name": "Right",
+                "Position": "-0.00000923872,-55,0",
+                "Rotation": "-0.7071067,-0.00000002980232,-0.00000002980232,0.7071067",
+                "Enabled": true,
+                "Components": [
+                  {
+                    "__type": "Sandbox.ModelRenderer",
+                    "__guid": "f19dcce9-87b8-491c-9231-681405aa50a2",
+                    "BodyGroups": 18446744073709551615,
+                    "CreateAttachments": false,
+                    "MaterialOverride": "materials/default.vmat",
+                    "Model": "models/arrow.vmdl",
+                    "RenderOptions": {
+                      "GameLayer": true,
+                      "OverlayLayer": false,
+                      "BloomLayer": false,
+                      "AfterUILayer": false
+                    },
+                    "RenderType": "On",
+                    "Tint": "1,1,1,1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__guid": "534762b8-fda2-4a1c-8e18-feee0977e0b9",
+        "Flags": 0,
+        "Name": "CameraArm",
+        "Position": "0,0,32",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "CameraMovement",
+            "__guid": "a3f4981a-4a4e-4b44-9365-74d431c8505e",
+            "Body": {
+              "_type": "gameobject",
+              "go": "534762b8-fda2-4a1c-8e18-feee0977e0b9"
+            },
+            "Distance": 0,
+            "Head": {
+              "_type": "gameobject",
+              "go": "534762b8-fda2-4a1c-8e18-feee0977e0b9"
+            },
+            "Player": {
+              "_type": "gameobject",
+              "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f"
+            }
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "3b737157-e2a7-4c90-a0ea-c0a1f1fe176d",
+            "Flags": 0,
+            "Name": "Offset",
+            "Position": "-224,0,32",
+            "Enabled": true,
+            "Children": [
+              {
+                "__guid": "645d6e83-7186-4f31-8a52-97ffb53f67bd",
+                "Flags": 0,
+                "Name": "Camera",
+                "Tags": "maincamera",
+                "Enabled": true,
+                "Components": [
+                  {
+                    "__type": "Sandbox.CameraComponent",
+                    "__guid": "aa0f24ba-62a5-487f-8c6d-9ffa6c57de03",
+                    "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                    "ClearFlags": "All",
+                    "FieldOfView": 80,
+                    "IsMainCamera": true,
+                    "Orthographic": false,
+                    "OrthographicHeight": 1204,
+                    "Priority": 1,
+                    "RenderExcludeTags": "",
+                    "RenderTags": "",
+                    "TargetEye": "None",
+                    "Viewport": "0,0,1,1",
+                    "ZFar": 63044,
+                    "ZNear": 10
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
