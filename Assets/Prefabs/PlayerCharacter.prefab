@@ -26,19 +26,9 @@
           {
             "__type": "PlayerCharacter",
             "__guid": "f78fcd24-97f6-4e4b-a5a7-4a7809c5d1a3",
-            "arrows": {
-              "_type": "gameobject",
-              "go": "5e13407b-249a-49b8-bd1f-ed6293174dbd"
-            },
             "ball": {
               "_type": "gameobject",
               "go": "9eeb9253-01f3-48e1-b404-d55ef4b1aca4"
-            },
-            "camera": {
-              "_type": "component",
-              "component_id": "aa0f24ba-62a5-487f-8c6d-9ffa6c57de03",
-              "go": "645d6e83-7186-4f31-8a52-97ffb53f67bd",
-              "component_type": "CameraComponent"
             },
             "capsuleCollider": {
               "_type": "component",
@@ -180,66 +170,6 @@
             ]
           },
           {
-            "__guid": "5e13407b-249a-49b8-bd1f-ed6293174dbd",
-            "Flags": 0,
-            "Name": "MovementArrows",
-            "Position": "0.000005722046,0,32",
-            "Enabled": true,
-            "Children": [
-              {
-                "__guid": "ed13354c-03d8-4149-9c2c-2d80a9f63097",
-                "Flags": 0,
-                "Name": "Forward",
-                "Position": "55,0,0",
-                "Rotation": "0,-0.7071067,0,0.7071068",
-                "Enabled": true,
-                "Components": [
-                  {
-                    "__type": "Sandbox.ModelRenderer",
-                    "__guid": "b1a11029-9fdf-4b25-b818-4c71aad85850",
-                    "BodyGroups": 18446744073709551615,
-                    "CreateAttachments": false,
-                    "Model": "models/arrow.vmdl",
-                    "RenderOptions": {
-                      "GameLayer": true,
-                      "OverlayLayer": false,
-                      "BloomLayer": false,
-                      "AfterUILayer": false
-                    },
-                    "RenderType": "On",
-                    "Tint": "1,1,1,1"
-                  }
-                ]
-              },
-              {
-                "__guid": "5281fb30-d5ba-4486-95dd-03790287f324",
-                "Flags": 0,
-                "Name": "Right",
-                "Position": "-0.00000923872,-55,0",
-                "Rotation": "-0.7071067,-0.00000002980232,-0.00000002980232,0.7071067",
-                "Enabled": true,
-                "Components": [
-                  {
-                    "__type": "Sandbox.ModelRenderer",
-                    "__guid": "f19dcce9-87b8-491c-9231-681405aa50a2",
-                    "BodyGroups": 18446744073709551615,
-                    "CreateAttachments": false,
-                    "MaterialOverride": "materials/default.vmat",
-                    "Model": "models/arrow.vmdl",
-                    "RenderOptions": {
-                      "GameLayer": true,
-                      "OverlayLayer": false,
-                      "BloomLayer": false,
-                      "AfterUILayer": false
-                    },
-                    "RenderType": "On",
-                    "Tint": "1,1,1,1"
-                  }
-                ]
-              }
-            ]
-          },
-          {
             "__guid": "9eeb9253-01f3-48e1-b404-d55ef4b1aca4",
             "Flags": 0,
             "Name": "spinball",
@@ -296,64 +226,36 @@
       {
         "__guid": "534762b8-fda2-4a1c-8e18-feee0977e0b9",
         "Flags": 0,
-        "Name": "CameraArm",
+        "Name": "Camera",
         "Position": "0,0,32",
         "Enabled": true,
         "Components": [
           {
             "__type": "CameraMovement",
-            "__guid": "a3f4981a-4a4e-4b44-9365-74d431c8505e",
-            "Camera": {
-              "_type": "component",
-              "component_id": "aa0f24ba-62a5-487f-8c6d-9ffa6c57de03",
-              "go": "645d6e83-7186-4f31-8a52-97ffb53f67bd",
-              "component_type": "CameraComponent"
-            },
-            "Head": {
-              "_type": "gameobject",
-              "go": "534762b8-fda2-4a1c-8e18-feee0977e0b9"
-            },
-            "Player": {
-              "_type": "gameobject",
-              "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f"
-            }
-          }
-        ],
-        "Children": [
+            "__guid": "dda7897f-fcc7-4c06-b9e5-6c5f463a943e",
+            "FloorAlignmentSharpness": 5,
+            "bShouldCameraAlignToFloor": false,
+            "Distance": 360,
+            "FaceMoveDirectionGracePeriod": 5,
+            "LookSensitivity": "5,5",
+            "PositionLerpSpeed": 25
+          },
           {
-            "__guid": "3b737157-e2a7-4c90-a0ea-c0a1f1fe176d",
-            "Flags": 0,
-            "Name": "Offset",
-            "Position": "-224,0,32",
-            "Enabled": true,
-            "Children": [
-              {
-                "__guid": "645d6e83-7186-4f31-8a52-97ffb53f67bd",
-                "Flags": 0,
-                "Name": "Camera",
-                "Tags": "maincamera",
-                "Enabled": true,
-                "Components": [
-                  {
-                    "__type": "Sandbox.CameraComponent",
-                    "__guid": "aa0f24ba-62a5-487f-8c6d-9ffa6c57de03",
-                    "BackgroundColor": "0.33333,0.46275,0.52157,1",
-                    "ClearFlags": "All",
-                    "FieldOfView": 80,
-                    "IsMainCamera": true,
-                    "Orthographic": false,
-                    "OrthographicHeight": 1204,
-                    "Priority": 1,
-                    "RenderExcludeTags": "",
-                    "RenderTags": "",
-                    "TargetEye": "None",
-                    "Viewport": "0,0,1,1",
-                    "ZFar": 63044,
-                    "ZNear": 10
-                  }
-                ]
-              }
-            ]
+            "__type": "Sandbox.CameraComponent",
+            "__guid": "d162a615-a075-4351-9628-e7741994f563",
+            "BackgroundColor": "0.33333,0.46275,0.52157,1",
+            "ClearFlags": "All",
+            "FieldOfView": 60,
+            "IsMainCamera": true,
+            "Orthographic": false,
+            "OrthographicHeight": 1204,
+            "Priority": 1,
+            "RenderExcludeTags": "",
+            "RenderTags": "",
+            "TargetEye": "None",
+            "Viewport": "0,0,1,1",
+            "ZFar": 10000,
+            "ZNear": 10
           }
         ]
       }
