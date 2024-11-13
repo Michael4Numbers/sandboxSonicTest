@@ -6,12 +6,12 @@
   },
   "scenes/minimal.scene.Viewport0": {
     "Value": "{\u0022CameraPosition\u0022:\u0022-207.5653,1446.681,228.637\u0022,\u0022CameraRotation\u0022:\u00220.0089177,0.007017806,-0.7857948,0.6183832\u0022,\u0022CameraOrthoHeight\u0022:1000}",
-    "Timeout": 1734116113,
+    "Timeout": 1734116858,
     "DeleteAt": 0
   },
   ".Viewport0": {
     "Value": "{\u0022CameraPosition\u0022:\u0022-91.09807,311.244,169.2925\u0022,\u0022CameraRotation\u0022:\u00220.1174978,0.1600124,-0.5800927,0.7899892\u0022,\u0022CameraOrthoHeight\u0022:1000}",
-    "Timeout": 1734116108,
+    "Timeout": 1734116805,
     "DeleteAt": 0
   },
   "prefabs/player.prefab.Viewport0": {
@@ -36,12 +36,12 @@
   },
   "SceneView.Viewport0.Settings": {
     "Value": "{\u0022CameraPosition\u0022:\u002282.02887,-75.63306,102.5256\u0022,\u0022CameraRotation\u0022:\u0022-0.2782461,0.1542344,0.8291794,0.4596219\u0022,\u0022View\u0022:0,\u0022RenderMode\u0022:0,\u0022WireframeMode\u0022:false,\u0022EnablePostProcessing\u0022:true,\u0022ShowGrid\u0022:true,\u0022GridOpacity\u0022:0.2,\u0022GridAxis\u0022:0,\u0022CameraOrthoHeight\u0022:1000}",
-    "Timeout": 1734116113,
+    "Timeout": 1734116858,
     "DeleteAt": 0
   },
   "SceneView.Layout": {
     "Value": "{\u0022Layout\u0022:0,\u0022SplitterState\u0022:[]}",
-    "Timeout": 1734116108,
+    "Timeout": 1734116858,
     "DeleteAt": 0
   },
   "AssetBrowser.Prefab.History": {
@@ -56,7 +56,7 @@
   },
   "gizmo.settings": {
     "Value": "{\u0022EditMode\u0022:\u0022position\u0022,\u0022Selection\u0022:true,\u0022ViewMode\u0022:\u00223d\u0022,\u0022GizmosEnabled\u0022:true,\u0022GizmoScale\u0022:1,\u0022GridSpacing\u0022:32,\u0022SnapToGrid\u0022:false,\u0022SnapToAngles\u0022:true,\u0022AngleSpacing\u0022:15,\u0022GlobalSpace\u0022:false,\u0022DebugActionGraphs\u0022:false}",
-    "Timeout": 1734111318,
+    "Timeout": 1734116858,
     "DeleteAt": 0
   },
   "prefabs/player - 2.prefab.Viewport0": {
@@ -196,7 +196,7 @@
   },
   "prefabs/playercharacter.prefab.Viewport0": {
     "Value": "{\u0022CameraPosition\u0022:\u002282.02887,-75.63306,102.5256\u0022,\u0022CameraRotation\u0022:\u0022-0.2782461,0.1542344,0.8291794,0.4596219\u0022,\u0022CameraOrthoHeight\u0022:1000}",
-    "Timeout": 1734116113,
+    "Timeout": 1734116858,
     "DeleteAt": 0
   },
   "AssetBrowser.Map.History": {
