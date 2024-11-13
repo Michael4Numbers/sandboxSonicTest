@@ -47,7 +47,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 	private bool airDashed = false;
 
-	[Sync]
+	//[Sync]
 	private List<IMovementMode> _movementModes { get; set; }
 
 	protected override void OnAwake()
