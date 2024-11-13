@@ -15,11 +15,12 @@
           {
             "__type": "Sandbox.CapsuleCollider",
             "__guid": "123ababf-59ad-4f24-8ade-64225fc7ccc0",
-            "End": "0,0,45",
+            "End": "0,0,50",
             "IsTrigger": false,
-            "Radius": 15,
-            "Start": "0,0,15",
+            "Radius": 10,
+            "Start": "0,0,10",
             "Static": false,
+            "Surface": "player.surface",
             "SurfaceVelocity": "0,0,0"
           },
           {
@@ -28,6 +29,10 @@
             "arrows": {
               "_type": "gameobject",
               "go": "5e13407b-249a-49b8-bd1f-ed6293174dbd"
+            },
+            "ball": {
+              "_type": "gameobject",
+              "go": "9eeb9253-01f3-48e1-b404-d55ef4b1aca4"
             },
             "camera": {
               "_type": "component",
@@ -41,13 +46,11 @@
               "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
               "component_type": "CapsuleCollider"
             },
-            "forwardArrow": {
-              "_type": "gameobject",
-              "go": "ed13354c-03d8-4149-9c2c-2d80a9f63097"
-            },
-            "rightArrow": {
-              "_type": "gameobject",
-              "go": "5281fb30-d5ba-4486-95dd-03790287f324"
+            "playermodel": {
+              "_type": "component",
+              "component_id": "f33d0930-a8a2-4052-ae00-a7922d9564f1",
+              "go": "d79c3909-f1ee-4f30-aacb-63fc3788f654",
+              "component_type": "SkinnedModelRenderer"
             },
             "rigid": {
               "_type": "component",
@@ -235,6 +238,30 @@
                 ]
               }
             ]
+          },
+          {
+            "__guid": "9eeb9253-01f3-48e1-b404-d55ef4b1aca4",
+            "Flags": 0,
+            "Name": "spinball",
+            "Position": "0,0,14.50587",
+            "Scale": "0.2,0.2,0.2",
+            "Components": [
+              {
+                "__type": "Sandbox.ModelRenderer",
+                "__guid": "7766ee37-5871-4820-83ab-b9709574cd29",
+                "BodyGroups": 18446744073709551615,
+                "CreateAttachments": false,
+                "Model": "characters/ball/spinball.vmdl",
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
           }
         ]
       },
@@ -248,6 +275,12 @@
           {
             "__type": "CameraMovement",
             "__guid": "a3f4981a-4a4e-4b44-9365-74d431c8505e",
+            "Camera": {
+              "_type": "component",
+              "component_id": "aa0f24ba-62a5-487f-8c6d-9ffa6c57de03",
+              "go": "645d6e83-7186-4f31-8a52-97ffb53f67bd",
+              "component_type": "CameraComponent"
+            },
             "Body": {
               "_type": "gameobject",
               "go": "534762b8-fda2-4a1c-8e18-feee0977e0b9"

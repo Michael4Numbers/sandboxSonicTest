@@ -17,11 +17,14 @@ public sealed class PlayerCharacter : Component, IScenePhysicsEvents
 	[Property]
 	public GameObject arrows { get; set; }
 
-	[Property]
-	public GameObject forwardArrow { get; set; }
+
 
 	[Property]
-	public GameObject rightArrow { get; set; }
+	public GameObject ball { get; set; }
+	[Property]
+	public SkinnedModelRenderer playermodel { get; set; }
+
+
 
 	[Property]
 	public CameraComponent camera { get; set; }
@@ -30,7 +33,15 @@ public sealed class PlayerCharacter : Component, IScenePhysicsEvents
 
 	private int maxBounces = 5;
 
+
 	private float skinWidth = 0.015f;
+
+	private float timeSinceLastJump = 0f;
+
+
+	private bool jumped = false;
+
+	private bool airDashed = false;
 
 	protected override void OnAwake()
 	{
@@ -39,8 +50,52 @@ public sealed class PlayerCharacter : Component, IScenePhysicsEvents
 
 	protected override void OnFixedUpdate()
 	{
+
+	}
+
+	void IScenePhysicsEvents.PrePhysicsStep()
+	{
+		// Calculate velocities (directly set it)
 		CalculateMovementArrows();
 		BuildWishVelocity();
+		var newSpeed = (rigid.Velocity.Length + (speed * 20 * MapRange( rigid.Velocity.Length, 0, 4000, 1, 0 )));
+		var trace = Scene.Trace.Ray( GameObject.WorldPosition + (GameObject.WorldRotation.Up * 10.0f), GameObject.WorldPosition + (GameObject.WorldRotation.Down * 10.0f) )
+			.Size( 5f )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.WithoutTags( "player" )
+			.Run();
+		if ( trace.Hit )
+		{
+			if ( wishVelocity.Length > 0 )
+			{
+				//rigid.Velocity = (wishVelocity * newSpeed);
+				var initDirection = rigid.Velocity.Normal;
+				var targetDirection = wishVelocity;
+				rigid.Velocity = (Vector3.Slerp( initDirection, targetDirection, .2f ) * newSpeed);
+			}
+			else
+			{
+				rigid.Velocity = (rigid.Velocity * 0.95f);
+			}
+		}
+		else
+		{
+			var initDirection = rigid.Velocity.WithZ( 0 ).Normal;
+			var targetDirection = wishVelocity;
+			
+			if(wishVelocity.Length > 0 )
+			{
+				rigid.Velocity = (Vector3.Slerp( initDirection, targetDirection, .1f ) * rigid.Velocity.WithZ(0).Length).WithZ(rigid.Velocity.z);
+			}
+			
+		}
+
+		
+	}
+
+	void IScenePhysicsEvents.PostPhysicsStep()
+	{
+		// Find ground
 		Move();
 	}
 
@@ -107,37 +162,21 @@ public sealed class PlayerCharacter : Component, IScenePhysicsEvents
 			.WithoutTags( "player" )
 			.Run();
 
-		float convertedDot = MapRange( dot, -1, 1, 5, 1 );
-
-		if ( trace.Hit )
-		{
-			if ( wishVelocity.Length > 0 )
-			{
-				rigid.ApplyForce( wishVelocity * 4500000 * convertedDot );
-			}
-			else
-			{
-				rigid.ApplyForce( rigid.Velocity * -5000 );
-			}
-		}
-		else
-		{
-			Vector3 preVelocity = rigid.Velocity;
-			rigid.ApplyForce( wishVelocity * 4500000 * convertedDot );
-
-		}
-	
+		
 
 		if ( rigid.Velocity.Length > 30 )
 		{
 			if ( trace.Hit )
 			{
 				Rotation targetRotation = Rotation.LookAt( rigid.Velocity.Normal, trace.Normal );
-				WorldRotation = Rotation.Slerp( WorldRotation, targetRotation, 10 * Time.Delta );
+				WorldRotation = targetRotation;
+				WorldPosition = trace.HitPosition - trace.Normal * 2.5f;
+				rigid.PhysicsBody.GravityScale = 0f;
 			} else
 			{
+				rigid.PhysicsBody.GravityScale = 3f;
 				Rotation targetRotation = Rotation.LookAt( rigid.Velocity.WithZ(0).Normal, new Vector3(0,0,1) );
-				WorldRotation = Rotation.Slerp( WorldRotation, targetRotation, 10 * Time.Delta );
+				WorldRotation = targetRotation;
 			}
 
 		}
@@ -151,13 +190,39 @@ public sealed class PlayerCharacter : Component, IScenePhysicsEvents
 
 	protected override void OnUpdate()
 	{
+		timeSinceLastJump += Time.Delta;
 		var trace = Scene.Trace.Ray( GameObject.WorldPosition + (GameObject.WorldRotation.Up * 10.0f), GameObject.WorldPosition + (GameObject.WorldRotation.Down * 10.0f) )
 			.Size( 5f )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.WithoutTags( "player" )
 			.Run();
-		rigid.PhysicsBody.GravityScale = 1.2f;
-		if ( Input.Pressed( "Jump" ) && trace.Hit ) rigid.Velocity = rigid.Velocity.WithZ( rigid.Velocity.z + 500 );
+		if ( Input.Pressed( "Jump" ) && trace.Hit )
+		{
+			rigid.Velocity = rigid.Velocity.WithZ( rigid.Velocity.z + 1500 );
+			Sound.Play( "player_jump", WorldPosition );
+			Sound.Play( "player_jumproll", WorldPosition );
+			ball.Enabled = true;
+			playermodel.Tint = Color.Transparent;
+			timeSinceLastJump = 0;
+			jumped = true;
+		}
+		else if ( trace.Hit && timeSinceLastJump > 0.2f )
+		{
+			ball.Enabled = false;
+			playermodel.Tint = Color.White;
+			jumped = false;
+			airDashed = false;
+		}
+
+		if ( Input.Pressed( "attack1" ) && !trace.Hit && !airDashed )
+		{
+			Sound.Play( "player_airdash", WorldPosition );
+			rigid.Velocity = (WorldRotation.Forward * 3000f).WithZ(0);
+			airDashed = true;
+			ball.Enabled = true;
+			playermodel.Tint = Color.Transparent;
+		}
+
 	}
 
 	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax )

@@ -7,11 +7,11 @@ public sealed class CameraMovement : Component
 	[Property] public GameObject Body { get; set; }
 	[Property] public float Distance { get; set; } = 0f;
 
-	private CameraComponent Camera;
+	[Property] public CameraComponent Camera;
 
 	protected override void OnAwake()
 	{
-		Camera = Components.Get<CameraComponent>();
+
 	}
 
 	protected override void OnUpdate()
@@ -26,6 +26,15 @@ public sealed class CameraMovement : Component
 
 	protected override void OnPreRender()
 	{
-		WorldPosition = Player.WorldPosition + (Player.WorldRotation.Up * 32);
+		var target = Player.WorldPosition + (Player.WorldRotation.Up * 32);
+		WorldPosition = Vector3.Lerp(WorldPosition, target, 25f * Time.Delta);
+		var speed = Player.GetComponent<Rigidbody>().Velocity.Length;
+		var targetFov = MapRange( speed, 1000, 3000, 80, 90 ).Clamp( 80, 90 );
+		Camera.FieldOfView = MathX.Lerp(Camera.FieldOfView, targetFov, 5 *  Time.Delta);
+	}
+
+	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax )
+	{
+		return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 	}
 }

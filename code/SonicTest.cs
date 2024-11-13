@@ -47,7 +47,7 @@ public sealed class SonicTest : Component
 			if ( rigid.Velocity.Length > 30 )
 			{
 				Vector3 targetVelocity = new Vector3( rigid.Velocity.x, rigid.Velocity.y, 0 );
-				Rotation targetRotation = Rotation.LookAt( rigid.Velocity.Normal, trace.Normal );
+				Rotation targetRotation = parent.WorldRotation;
 				Model.WorldRotation = Rotation.Slerp( Model.WorldRotation, targetRotation, 10 * Time.Delta );
 			}
 			else
@@ -61,7 +61,7 @@ public sealed class SonicTest : Component
 		{
 			if ( rigid.Velocity.WithZ(0).Length > 30 )
 			{
-				Rotation targetRotation = Rotation.LookAt( rigid.Velocity.Normal.WithZ( 0 ), new Vector3( 0, 0, 1 ) );
+				Rotation targetRotation = parent.WorldRotation;
 				Model.WorldRotation = Rotation.Slerp( Model.WorldRotation, targetRotation, 10 * Time.Delta );
 			}
 			else
