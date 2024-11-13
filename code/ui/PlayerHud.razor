@@ -1,0 +1,22 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+	<div class="vitals">
+		<p>🦔 Speed @player.rigid.Velocity.Length</p>
+	</div>
+</root>
+
+@code
+{
+	[Property] PlayerCharacter player;
+
+	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World! If I change I Update the UI";
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine(player.rigid.Velocity.Length);
+}

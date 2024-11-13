@@ -5,14 +5,14 @@
   "Decibels": 70,
   "SelectionMode": "Random",
   "Sounds": [
-    "sounds/player/027_jump_aif.vsnd"
+    "sounds/player/029_homing_aif.vsnd"
   ],
   "Occlusion": true,
   "AirAbsorption": true,
   "Transmission": true,
   "OcclusionRadius": 64,
   "DistanceAttenuation": true,
-  "Distance": 5000,
+  "Distance": 15000,
   "Falloff": [
     {
       "y": 1,

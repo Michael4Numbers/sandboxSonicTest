@@ -48,11 +48,6 @@ public sealed class PlayerCharacter : Component, IScenePhysicsEvents
 		rigid = Components.Get<Rigidbody>();
 	}
 
-	protected override void OnFixedUpdate()
-	{
-
-	}
-
 	void IScenePhysicsEvents.PrePhysicsStep()
 	{
 		// Calculate velocities (directly set it)

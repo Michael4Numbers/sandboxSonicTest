@@ -10,7 +10,7 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "156,-96",
+      "Position": "0,-96",
       "Albedo": {
         "Identifier": "1",
         "Output": "Result"

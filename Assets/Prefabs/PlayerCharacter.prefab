@@ -262,6 +262,34 @@
                 "Tint": "1,1,1,1"
               }
             ]
+          },
+          {
+            "__guid": "c39a7682-028b-4812-bd7d-b6f502241894",
+            "Flags": 0,
+            "Name": "Screen_UI",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.ScreenPanel",
+                "__guid": "0f77f575-e45a-49b9-9dd9-3a7a95032db2",
+                "AutoScreenScale": true,
+                "Opacity": 1,
+                "Scale": 1,
+                "ScaleStrategy": "ConsistentHeight",
+                "ZIndex": 100
+              },
+              {
+                "__type": "Sandbox.PlayerHud",
+                "__guid": "976e9fd5-ea84-4c41-8ae0-6f8dfd4806cb",
+                "player": {
+                  "_type": "component",
+                  "component_id": "f78fcd24-97f6-4e4b-a5a7-4a7809c5d1a3",
+                  "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
+                  "component_type": "PlayerCharacter"
+                },
+                "MyStringValue": "Hello World!"
+              }
+            ]
           }
         ]
       },
@@ -281,11 +309,6 @@
               "go": "645d6e83-7186-4f31-8a52-97ffb53f67bd",
               "component_type": "CameraComponent"
             },
-            "Body": {
-              "_type": "gameobject",
-              "go": "534762b8-fda2-4a1c-8e18-feee0977e0b9"
-            },
-            "Distance": 0,
             "Head": {
               "_type": "gameobject",
               "go": "534762b8-fda2-4a1c-8e18-feee0977e0b9"
