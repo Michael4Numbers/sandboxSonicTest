@@ -1,15 +1,45 @@
-PlayerHud
-{
+PlayerHud {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
+	font-family: Poppins;
+	font-size: 24px;
 
-	.title
-	{
-		font-size: 25px;
-		font-family: Poppins;
-		color: #fff;
+	.vitals {
+		position: absolute;
+		top: 32px;
+		left: 32px;
+		font-size: 64px;
+		font-weight: bold;
+	}
+
+	.speedBar {
+		position: absolute;
+		bottom: 32px;
+		left: 32px;
+
+		.SpeedText {
+			font-size: 50px;
+			font-weight: bold;
+			text-shadow: 2px 2px black;
+			color: blue;
+			transform: skewX(10deg);
+			margin-right: 15px;
+		}
+
+		.innerSpeedBar {
+			width: 400px;
+			height: 64px;
+			background-color: black;
+			transform: skewX(10deg);
+			border: 5px solid black;
+
+
+			.fill {
+				background-color: blue;
+			}
+		}
 	}
 }

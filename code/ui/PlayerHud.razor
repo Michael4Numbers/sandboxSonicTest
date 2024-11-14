@@ -5,7 +5,17 @@
 
 <root>
 	<div class="vitals">
-		<p>🦔 Speed @player.rigid.Velocity.Length</p>
+		<p>🦔</p>
+	</div>
+	<div class="speedBar">
+		<div class="SpeedText">
+			Speed
+		</div>
+		<div class="innerSpeedBar">
+			<div class="fill" style="width: @(Speed)%">
+
+			</div>
+		</div>
 	</div>
 </root>
 
@@ -15,8 +25,20 @@
 
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World! If I change I Update the UI";
 
+	float Speed = 0;
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash() => System.HashCode.Combine(player.rigid.Velocity.Length);
+	protected override int BuildHash() => System.HashCode.Combine(Speed);
+
+	protected override void OnUpdate()
+	{
+		var target = MapRange(player.rigid.Velocity.Length, 0, 3500, 0, 100).Clamp(0, 100);
+		Speed = MathX.Lerp(Speed, target, 20 * Time.Delta);
+	}
+
+	public static float MapRange(float value, float inMin, float inMax, float outMin, float outMax)
+	{
+		return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+	}
 }
