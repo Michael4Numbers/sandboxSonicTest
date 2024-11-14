@@ -11,6 +11,7 @@
         "Name": "Player",
         "Tags": "player",
         "Enabled": true,
+        "NetworkMode": 1,
         "Components": [
           {
             "__type": "Sandbox.CapsuleCollider",
@@ -26,6 +27,7 @@
           {
             "__type": "PlayerCharacter",
             "__guid": "f78fcd24-97f6-4e4b-a5a7-4a7809c5d1a3",
+            "StepHeight": 25,
             "ball": {
               "_type": "gameobject",
               "go": "9eeb9253-01f3-48e1-b404-d55ef4b1aca4"
@@ -235,6 +237,12 @@
             "__guid": "dda7897f-fcc7-4c06-b9e5-6c5f463a943e",
             "FloorAlignmentSharpness": 5,
             "bShouldCameraAlignToFloor": false,
+            "Camera": {
+              "_type": "component",
+              "component_id": "d162a615-a075-4351-9628-e7741994f563",
+              "go": "534762b8-fda2-4a1c-8e18-feee0977e0b9",
+              "component_type": "CameraComponent"
+            },
             "Distance": 360,
             "FaceMoveDirectionGracePeriod": 5,
             "LookSensitivity": "5,5",

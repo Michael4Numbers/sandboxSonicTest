@@ -1,6 +1,7 @@
 {
-  "Title": "NewerProject",
+  "Title": "HedgeBox",
   "Type": "game",
+  "Org": "local",
   "Ident": "newerproject",
   "Schema": 1,
   "IncludeSourceFiles": false,
