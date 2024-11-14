@@ -1,0 +1,49 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root class="@(isPaused ? "" : "hide")">
+	<h2>Paused</h2>
+	<div class="options">
+		<div class="button" onclick=@OnResume>
+			Resume
+		</div>
+		<div class="button" onclick=@OnQuit>
+			Quit (Alt+F4)
+		</div>
+	</div>
+</root>
+
+@code
+{
+
+	public bool isPaused { get; set; }
+	[Property] PauseMenuFunctionality functionality;
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+
+		if(Input.EscapePressed){
+			isPaused = !isPaused;
+		}
+
+		Scene.TimeScale = isPaused ? 0 : 1;
+	}
+
+	void OnResume(){
+		isPaused = false;
+	}
+
+	void OnQuit(){
+		functionality.QuitGame();
+	}
+
+	[Property, TextArea] public string MyStringValue { get; set; } = "Hello Worlds!";
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine( isPaused );
+}

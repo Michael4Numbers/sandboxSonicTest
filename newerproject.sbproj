@@ -2,7 +2,7 @@
   "Title": "HedgeBox",
   "Type": "game",
   "Org": "local",
-  "Ident": "newerproject",
+  "Ident": "hedgebox",
   "Schema": 1,
   "IncludeSourceFiles": false,
   "Resources": null,
