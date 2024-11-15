@@ -53,10 +53,6 @@
             }
           },
           {
-            "__type": "Sandbox.MovementModes.MovementModeManager",
-            "__guid": "aa56d37b-8929-4570-a3e9-17a45e33dfcf"
-          },
-          {
             "__type": "Sandbox.Rigidbody",
             "__guid": "7bbfdcb0-0913-4f13-97fc-4830431ed902",
             "AngularDamping": 0.1,
@@ -273,8 +269,12 @@
                 "MaxSlopeAngle": 360
               },
               {
+                "__type": "Sandbox.MovementModes.MovementModeManager",
+                "__guid": "96266cb7-6c35-4094-98f9-ba074671792a"
+              },
+              {
                 "__type": "Sandbox.MovementModes.AirMovement",
-                "__guid": "c45583d5-ec37-4778-85b1-bfbb826ba565",
+                "__guid": "e221d98e-476a-48eb-85d2-44295ae19f68",
                 "AirSpeed": 1
               }
             ]
