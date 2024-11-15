@@ -18,9 +18,7 @@ public class GroundMovement : IMovementMode
 
 	public void CalcVelocity(ref Vector3 velocity)
 	{
-		_rb.PhysicsBody.GravityScale = 0f;
-
-		Vector3 targetVel = _player.InputVector * _player.speed;
+		Vector3 targetVel = _player.bSpinDashCharging ? 0 : _player.InputVector * _player.speed; // zero input vector if charging a spindash
 		
 		var newSpeed = (velocity.Length + (_player.speed * 20 * PlayerCharacter.MapRange( velocity.Length, 0, 4000, 1, 0 )));
 
@@ -37,12 +35,36 @@ public class GroundMovement : IMovementMode
 		{
 			velocity = (velocity * 0.95f);
 		}
+		
+		// Slope physics
+		float slopeSlideVelThreshold = 400;
+		if ( velocity.Length > slopeSlideVelThreshold )
+		{
+			// Add slope physics, but only in the sense that we speed up/slow down not change directions
+			if ( velocity.Length > 4000 ) return;
+		
+			float dH = (velocity * Time.Delta).Dot( _player.TargetGravDir );
+			float dV = float.Sign( dH ) * float.Sqrt( 10 * float.Abs(dH) );
+			velocity = velocity.Normal * (velocity.Length + dV);
+		}
+		else
+		{
+			// Apply gravity directly if we're not moving so we slide down slopes if standing still [optional]
+			Vector3 gravOnPlane = _player.TargetGravDir.PlaneProject( _player.GroundingStatus.HitResult.Normal ) * _player.Gravity.Length;
+			velocity += gravOnPlane * Time.Delta;
+		}
 	}
 
 	public void UpdateRotation()
 	{
 		Vector3 targetUp = _player.GroundingStatus.HitResult.Normal;
 		Vector3 targetForward = _rb.Velocity.IsNearlyZero() ? _player.WorldRotation.Forward : _rb.Velocity.Normal;
+
+		if ( _player.bSpinDashCharging )
+		{
+			targetForward = _player.InputVector;
+		}
+		
 		targetForward = targetForward.PlaneProject( targetUp ).Normal;
 
 		Rotation targetRot = Rotation.LookAt( targetForward, targetUp );

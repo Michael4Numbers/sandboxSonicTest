@@ -20,7 +20,8 @@ public struct FGroundingStatus
 
 public sealed partial class PlayerCharacter : Component
 {
-
+	public Action OnLanded;
+	
 	public FGroundingStatus GroundingStatus { get => _groundingStatus; }
 	private FGroundingStatus _groundingStatus;
 	private FGroundingStatus _prevGroundingStatus;
@@ -30,7 +31,7 @@ public sealed partial class PlayerCharacter : Component
 	{
 		if ( _timeUntilReground > 0 ) return;
 		
-		SceneTraceResult rayHit = Scene.Trace.Ray(GameObject.WorldPosition + (GameObject.WorldRotation.Up * 10.0f), GameObject.WorldPosition + (GameObject.WorldRotation.Down * 10.0f) )
+		SceneTraceResult rayHit = Scene.Trace.Ray(GameObject.WorldPosition + (-GravityDir * 10.0f), GameObject.WorldPosition + (GravityDir * 10.0f) )
 			.Size( 5 )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.WithoutTags( "player" )
@@ -40,13 +41,13 @@ public sealed partial class PlayerCharacter : Component
 		_groundingStatus.SetFromHit( rayHit );
 
 		// Compare ground results to see if we should eject from the ground on sharp angles
-		if ( _groundingStatus.bHasGround && _prevGroundingStatus.bHasGround )
+		if ( _groundingStatus.bHasGround && _prevGroundingStatus.bHasGround ) // BUG: Currently doesnt work as expected so disabling it, needs better ground tracing to work
 		{
 			float angleDelta = _prevGroundingStatus.Angle - _groundingStatus.Angle;
 			if ( angleDelta > 20 ) // Hard coded denivelation angle
 			{
-				_groundingStatus.bHasGround = false; // To not snap to the floor since its invalid
-				UnGround();
+				//_groundingStatus.bHasGround = false; // To not snap to the floor since its invalid
+				//UnGround();
 			}
 		}
 
@@ -64,11 +65,16 @@ public sealed partial class PlayerCharacter : Component
 			
 			WorldPosition = _groundingStatus.HitResult.HitPosition - _groundingStatus.HitResult.Normal * 2.5f;
 		}
+
+		if ( !_prevGroundingStatus.bHasGround && _groundingStatus.bHasGround )
+		{
+			OnLanded?.Invoke();
+		}
 	}
 
 	public bool IsOnStableGround() => _groundingStatus.bHasGround;
 
-	void UnGround()
+	public void UnGround()
 	{
 		_timeUntilReground = 0.3f; // Don't snap to floors for this duration
 		_groundingStatus.bHasGround = false;

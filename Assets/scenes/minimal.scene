@@ -491,6 +491,91 @@
       "Enabled": true,
       "__Prefab": "prefabs/playercharacter.prefab",
       "__PrefabVariables": {}
+    },
+    {
+      "__guid": "21e87061-95d7-4bcb-9430-12743aa9baa0",
+      "Flags": 0,
+      "Name": "GravVolume_Box",
+      "Position": "3990.656,-464.9431,667.3322",
+      "Rotation": "0.7071067,0,0,0.7071068",
+      "Scale": "38.89438,33.01865,31.9512",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "87e3f563-4a0c-4eb9-96d1-11319e1332da",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "32,32,32",
+          "Static": true,
+          "SurfaceVelocity": "0,0,0"
+        },
+        {
+          "__type": "Sandbox.LevelPrimitives.GravityVolume",
+          "__guid": "7ba04eec-cf31-4c90-b3d0-d45f406143ab",
+          "GravityVolumeType": "Box"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "5e94b497-c243-4fe1-9a62-187c938691fd",
+          "Flags": 0,
+          "Name": "Cube",
+          "Position": "0,0.05831786,15.38076",
+          "Scale": "0.7650031,0.7066377,0.1934259",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "73872a6f-e31b-4aa3-8cd7-441255641297",
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "Model": "models/dev/box.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "516e5a6a-85c0-43ff-93aa-80141fad7863",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50.09991,50.29993,50.89992",
+              "Static": false,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "26b6937c-4a26-4309-90a3-8cff19eef724",
+      "Flags": 0,
+      "Name": "GravVolume_Sphere",
+      "Position": "3490.803,-2678.434,1158.108",
+      "Scale": "31.49515,41.1244,31.9512",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.LevelPrimitives.GravityVolume",
+          "__guid": "cd74d41a-abf7-4fe8-9a74-a6be878d52bf",
+          "GravityVolumeType": "Sphere"
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "a306f563-6535-4999-b7f3-11709847dfd5",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Radius": 33.90001,
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
+        }
+      ]
     }
   ],
   "SceneProperties": {

@@ -23,14 +23,39 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 	[Property]
 	public float speed { get; set; } = 1f;
+
+	
+#region GRAVITY PARAMS
+	
+	[Property] public float GravityScale = 3;
+	
+	[Sync]
+	public Vector3 GravityDir
+	{
+		get => _gravityDir.Normal;
+		set
+		{
+			// Adventure style gravity where we 'slerp' it
+			if ( IsOnStableGround() ) _gravityDir = value.Normal;
+			else _gravityDir = Vector3.Slerp( _gravityDir, value.Normal, 10 * Time.Delta ).Normal;
+		}
+	}
+	[Sync] public Vector3 TargetGravDir { get; set; } = Vector3.Down;
+	
+	[Sync]
+	public Vector3 Gravity
+	{
+		get => Scene.PhysicsWorld.Gravity.Length * GravityDir * GravityScale;
+	}
+
+	private Vector3 _gravityDir;
+	
+#endregion
 	
 	[Property]
 	public GameObject ball { get; set; }
 	[Property]
 	public SkinnedModelRenderer playermodel { get; set; }
-
-	[Sync]
-	public Vector3 wishVelocity { get; set; } = Vector3.Zero;
 	
 	[Sync]
 	public Vector3 InputVector { get; set; } = Vector3.Zero;
@@ -53,6 +78,14 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	protected override void OnAwake()
 	{
 		rigid = Components.Get<Rigidbody>();
+	}
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+		
+		rigid.Gravity = true; // S&Box BUG! rigidbodies with Gravity = false just dont work properly it seems...
+		rigid.PhysicsBody.GravityScale = 0;
 		
 		// Add movement modes
 		_movementModes = new List<IMovementMode>();
@@ -64,6 +97,23 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 		{
 			mode.Init( this );
 		}
+
+		// example
+		OnLanded += OnLandedListener;
+	}
+
+	void OnLandedListener()
+	{
+		// example
+		Log.Info( "SONIC HAS LANDED!" );
+	}
+
+	protected override void OnPreRender()
+	{
+		base.OnPreRender();
+		
+		Gizmo.Draw.Color = ( Color.Orange );
+		Gizmo.Draw.Arrow( GameObject.WorldPosition, GameObject.WorldPosition + GravityDir * 75, 8, 3 );
 	}
 
 	void IScenePhysicsEvents.PrePhysicsStep()
@@ -89,6 +139,9 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 		// Find ground
 		EvaluateGroundingStatus();
 		
+		// Update gravity
+		GravityDir = IsOnStableGround() ? -_groundingStatus.HitResult.Normal : TargetGravDir;
+		
 		// Update our rotation now that we're done with everything
 		// Run the appropriate calc velocity
 		foreach ( var mode in _movementModes )
@@ -100,21 +153,12 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 		
 		// Revert step (this is done in S&Boxs PlayerController)
 		RestoreStep();
-		
-		// Update gravity based on grounding status
-		if ( IsOnStableGround() )
-		{
-			rigid.PhysicsBody.GravityScale = 0;
-		}
-		else
-		{
-			rigid.PhysicsBody.GravityScale = 3f;
-		}
+
 	}
 
 	Vector3 CameraRelativeInput(Vector3 rawInput)
 	{
-		Vector3 targetNormal = IsOnStableGround() ? _groundingStatus.HitResult.Normal : new Vector3( 0, 0, 1 );
+		Vector3 targetNormal = IsOnStableGround() ? _groundingStatus.HitResult.Normal : -GravityDir;
 		Rotation rotation = Scene.Camera.WorldRotation;
 		
 		Rotation planeRot = Rotation.FromToRotation( rotation.Up, targetNormal );
@@ -142,8 +186,8 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	}
 
 	#region Spindash Test
-	
-	private bool bSpinDashCharging = false;
+
+	public bool bSpinDashCharging { get; private set; } = false;
 	TimeSince _timeSinceDashing = 0;
 	public TimeUntil _timeUntilDashOver = 0;
 	void TrySpinDash()
@@ -182,7 +226,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 		if ( Input.Pressed( "Jump" ) && IsOnStableGround() )
 		{
-			rigid.Velocity = rigid.Velocity.WithZ( rigid.Velocity.z + 1500 );
+			rigid.Velocity -= GravityDir * 1500; // jumps away from the floor
 			Sound.Play( "player_jump", WorldPosition );
 			Sound.Play( "player_jumproll", WorldPosition );
 			ball.Enabled = true;

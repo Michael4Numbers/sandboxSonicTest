@@ -48,12 +48,12 @@ public sealed class CameraMovement : Component, IScenePhysicsEvents
 
 	void IScenePhysicsEvents.PostPhysicsStep()
 	{
-		CameraUpdate();
+		//CameraUpdate();
 	}
 	
 	protected override void OnPreRender()
 	{
-		//CameraUpdate();
+		CameraUpdate();
 	}
 
 	void CameraUpdate()

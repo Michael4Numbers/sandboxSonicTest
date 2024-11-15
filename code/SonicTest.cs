@@ -6,11 +6,8 @@ public sealed class SonicTest : Component
 	[Property]
 	public SkinnedModelRenderer Model { get; set; }
 
-	[Property]
-	public GameObject parent {  get; set; }
 
-	[Property]
-	public Rigidbody rigid { get; set; }
+	private PlayerCharacter _player;
 
 	[Property]
 	public SoundPointComponent soundPoint { get; set; }
@@ -21,27 +18,30 @@ public sealed class SonicTest : Component
 		base.OnAwake();
 		Model.OnGenericEvent = ( a ) =>
 		{
-			if(rigid.Velocity.Length > 50 )
+			if(_player.rigid.Velocity.Length > 50 )
 			{
 				//PlayerController.PlayFootstepSound( WorldPosition, 1.0f, 1 );
 				Sound.Play( "footstep-concrete", WorldPosition );
 			}
 			
 		};
+
+		_player = GetComponentInParent<PlayerCharacter>();
 	}
 
 	protected override void OnUpdate()
 	{
-		Model.Set( "move_speed", rigid.Velocity.Length );
-		Model.Set( "fall_speed", rigid.Velocity.z );
+		Model.Set( "move_speed", _player.rigid.Velocity.Length );
+		Model.Set( "fall_speed", _player.rigid.Velocity.z );
 		var trace = Scene.Trace.Ray( GameObject.WorldPosition + (GameObject.WorldRotation.Up * 10.0f), GameObject.WorldPosition + (GameObject.WorldRotation.Down * 10.0f) )
 			.Size( 5f )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.WithoutTags( "player" )
 			.Run();
-		Model.Set( "isFalling", !trace.Hit );
-		Model.Set( "RunMultiplier", MapRange( rigid.Velocity.Length, 1250, 3000, 1, 3 ).Clamp(1, 3) );
+		Model.Set( "isFalling", !_player.IsOnStableGround() );
+		Model.Set( "RunMultiplier", MapRange( _player.rigid.Velocity.Length, 1250, 3000, 1, 3 ).Clamp(1, 3) );
 
+		/* Disabled because player game object already smoothly slerps their rotation?
 		if( trace.Hit )
 		{
 			if ( rigid.Velocity.Length > 30 )
@@ -71,7 +71,7 @@ public sealed class SonicTest : Component
 				Model.WorldRotation = Rotation.LookAt( forward, new Vector3( 0, 0, 1 ) );
 			}
 		}
-
+		*/
 	}
 
 	protected override void OnFixedUpdate()

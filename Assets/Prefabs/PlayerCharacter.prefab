@@ -27,6 +27,7 @@
           {
             "__type": "PlayerCharacter",
             "__guid": "f78fcd24-97f6-4e4b-a5a7-4a7809c5d1a3",
+            "GravityScale": 3,
             "StepHeight": 25,
             "ball": {
               "_type": "gameobject",
@@ -125,10 +126,13 @@
                 "Model": "characters/sk_sonicrig.vmdl",
                 "Morphs": {},
                 "Parameters": {
-                  "bools": {},
+                  "bools": {
+                    "isFalling": false
+                  },
                   "ints": {},
                   "floats": {
-                    "move_speed": 0
+                    "move_speed": 0,
+                    "fall_speed": 0
                   },
                   "vectors": {},
                   "rotations": {}
@@ -151,16 +155,6 @@
                   "component_id": "f33d0930-a8a2-4052-ae00-a7922d9564f1",
                   "go": "d79c3909-f1ee-4f30-aacb-63fc3788f654",
                   "component_type": "SkinnedModelRenderer"
-                },
-                "parent": {
-                  "_type": "gameobject",
-                  "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f"
-                },
-                "rigid": {
-                  "_type": "component",
-                  "component_id": "7bbfdcb0-0913-4f13-97fc-4830431ed902",
-                  "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
-                  "component_type": "Rigidbody"
                 },
                 "soundPoint": {
                   "_type": "component",
@@ -283,9 +277,9 @@
               "go": "534762b8-fda2-4a1c-8e18-feee0977e0b9",
               "component_type": "CameraComponent"
             },
-            "Distance": 360,
+            "Distance": 400,
             "FaceMoveDirectionGracePeriod": 5,
-            "LookSensitivity": "5,5",
+            "LookSensitivity": "25,25",
             "PositionLerpSpeed": 25
           },
           {
