@@ -2,25 +2,52 @@
 
 public class GroundMovement : IMovementMode
 {
-	private PlayerCharacter _player;
-	private Rigidbody _rb;
+	[Property] private float GroundSpeed { get; set; } = 1f;
+	[Property, Range(0,360)] private float MaxSlopeAngle { get; set; } = 60f;
 	
-	public bool ShouldRun()
+	public override bool EnterCondition()
 	{
 		return _player.IsOnStableGround();
 	}
 
-	public void Init( PlayerCharacter player )
+	public override void PrePhysics()
 	{
-		_player = player;
-		_rb = _player.rigid;
+		_player.CalculateInputVector();
+		
+		// Calculate velocities (directly set it)
+		Vector3 vel = _rb.Velocity;
+		
+		CalcVelocity( ref vel );
+		
+		// Set velocity accordingly
+		_rb.Velocity = vel;
+
+		_player.TryStep();
 	}
 
-	public void CalcVelocity(ref Vector3 velocity)
+	public override void PostPhysics()
 	{
-		Vector3 targetVel = _player.bSpinDashCharging ? 0 : _player.InputVector * _player.speed; // zero input vector if charging a spindash
+		// Find ground
+		_player.EvaluateGroundingStatus();
 		
-		var newSpeed = (velocity.Length + (_player.speed * 20 * PlayerCharacter.MapRange( velocity.Length, 0, 4000, 1, 0 )));
+		if (_player.GroundingStatus.Angle > MaxSlopeAngle)
+			_player.UnGround();
+		
+		// Update gravity
+		_player.GravityDir = -_player.GroundingStatus.HitResult.Normal;
+		
+		
+		UpdateRotation();
+
+		// Revert step (this is done in S&Boxs PlayerController)
+		//_player.RestoreStep();
+	}
+
+	public override void CalcVelocity(ref Vector3 velocity)
+	{
+		Vector3 targetVel = _player.bSpinDashCharging ? 0 : _player.InputVector * GroundSpeed; // zero input vector if charging a spindash
+		
+		var newSpeed = (velocity.Length + (GroundSpeed * 20 * PlayerCharacter.MapRange( velocity.Length, 0, 4000, 1, 0 )));
 
 		// Limiting turn rate during the spindash grace period
 		float turnRate = _player._timeUntilDashOver > 0 ? .05f : 0.2f;
@@ -55,7 +82,7 @@ public class GroundMovement : IMovementMode
 		}
 	}
 
-	public void UpdateRotation()
+	public override void UpdateRotation()
 	{
 		Vector3 targetUp = _player.GroundingStatus.HitResult.Normal;
 		Vector3 targetForward = _rb.Velocity.IsNearlyZero() ? _player.WorldRotation.Forward : _rb.Velocity.Normal;

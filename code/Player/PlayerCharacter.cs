@@ -19,11 +19,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	public Rigidbody rigid { get; set; }
 
 	[Property]
-	public CapsuleCollider capsuleCollider { get; set; }
-
-	[Property]
-	public float speed { get; set; } = 1f;
-
+	public CapsuleCollider capsuleCollider { get; set; } 
 	
 #region GRAVITY PARAMS
 	
@@ -88,9 +84,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 		rigid.PhysicsBody.GravityScale = 0;
 		
 		// Add movement modes
-		_movementModes = new List<IMovementMode>();
-		_movementModes.Add( new GroundMovement() );
-		_movementModes.Add( new AirMovement() );
+		_movementModes = GetComponentsInChildren<IMovementMode>().ToList();
 		
 		// Initialize modes
 		foreach (var mode in _movementModes)
@@ -118,42 +112,33 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 	void IScenePhysicsEvents.PrePhysicsStep()
 	{
-		CalculateInputVector();
-		
-		// Calculate velocities (directly set it)
-		Vector3 vel = rigid.Velocity;
-		// Run the appropriate calc velocity
 		foreach ( var mode in _movementModes )
 		{
-			if (mode.ShouldRun())
-				mode.CalcVelocity( ref vel );
+			if (mode.IsEnabled())
+				mode.PrePhysics( );
 		}
-		// Set velocity accordingly
-		rigid.Velocity = vel;
-
-		TryStep();
 	}
 
-	void IScenePhysicsEvents.PostPhysicsStep()
+	public void PostPhysicsStep()
 	{
-		// Find ground
-		EvaluateGroundingStatus();
-		
-		// Update gravity
-		GravityDir = IsOnStableGround() ? -_groundingStatus.HitResult.Normal : TargetGravDir;
-		
-		// Update our rotation now that we're done with everything
-		// Run the appropriate calc velocity
 		foreach ( var mode in _movementModes )
 		{
-			if (mode.ShouldRun())
-				mode.UpdateRotation( );
+			if (mode.IsEnabled())
+				mode.PostPhysics( );
 		}
-		//UpdateRotation();
-		
-		// Revert step (this is done in S&Boxs PlayerController)
-		RestoreStep();
+	}
 
+	protected override void OnFixedUpdate()
+	{
+		base.OnFixedUpdate();
+		
+		// Enable & Disable the appropriate movement modes
+		foreach (var mode in _movementModes)
+		{
+			bool bValid = mode.EnterCondition();
+			if ( !bValid && mode.IsEnabled() ) mode.Enabled = false;
+			else if (bValid && !mode.IsEnabled()) mode.Enabled = true;
+		}
 	}
 
 	Vector3 CameraRelativeInput(Vector3 rawInput)
@@ -169,7 +154,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 		return forward * rawInput.x + right * rawInput.y;
 	}
 
-	void CalculateInputVector()
+	public void CalculateInputVector()
 	{
 		// Reset
 		InputVector = Vector3.Zero;

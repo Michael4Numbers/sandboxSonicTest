@@ -2,23 +2,41 @@
 
 public class AirMovement : IMovementMode
 {
-	private PlayerCharacter _player;
-	private Rigidbody _rb;
+	[Property] private float AirSpeed { get; set; } = 1f;
 
-	public bool ShouldRun()
+	public override bool EnterCondition()
 	{
 		return !_player.IsOnStableGround();
 	}
 
-	public void Init( PlayerCharacter player )
+	public override void PrePhysics()
 	{
-		_player = player;
-		_rb = _player.rigid;
+		_player.CalculateInputVector();
+		
+		// Calculate velocities (directly set it)
+		Vector3 vel = _rb.Velocity;
+		
+		CalcVelocity( ref vel );
+		
+		// Set velocity accordingly
+		_rb.Velocity = vel;
 	}
 
-	public void CalcVelocity(ref Vector3 velocity)
+	public override void PostPhysics()
 	{
-		Vector3 targetVel = _player.InputVector * _player.speed;
+		// Find ground
+		_player.EvaluateGroundingStatus();
+		
+		// Update gravity
+		_player.GravityDir = _player.TargetGravDir;
+		
+		
+		UpdateRotation();
+	}
+
+	public override void CalcVelocity(ref Vector3 velocity)
+	{
+		Vector3 targetVel = _player.InputVector * AirSpeed;
 
 		var initDirection = velocity.WithZ( 0 ).Normal;
 		var targetDirection = targetVel;
@@ -32,7 +50,7 @@ public class AirMovement : IMovementMode
 		velocity += _player.Gravity * Time.Delta;
 	}
 
-	public void UpdateRotation()
+	public override void UpdateRotation()
 	{
 		Vector3 targetUp = -_player.GravityDir;
 		Vector3 targetForward = _rb.Velocity.IsNearlyZero() ? _player.WorldRotation.Forward : _rb.Velocity.Normal;

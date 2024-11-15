@@ -27,7 +27,7 @@ public sealed partial class PlayerCharacter : Component
 	private FGroundingStatus _prevGroundingStatus;
 	private TimeUntil _timeUntilReground = 0;
 
-	void EvaluateGroundingStatus()
+	public void EvaluateGroundingStatus()
 	{
 		if ( _timeUntilReground > 0 ) return;
 		
@@ -39,6 +39,7 @@ public sealed partial class PlayerCharacter : Component
 
 		_prevGroundingStatus = _groundingStatus;
 		_groundingStatus.SetFromHit( rayHit );
+		_groundingStatus.Angle = MathF.Acos( rayHit.Normal.Dot( -TargetGravDir ) ).RadianToDegree().NormalizeDegrees();
 
 		// Compare ground results to see if we should eject from the ground on sharp angles
 		if ( _groundingStatus.bHasGround && _prevGroundingStatus.bHasGround ) // BUG: Currently doesnt work as expected so disabling it, needs better ground tracing to work

@@ -50,8 +50,11 @@
               "component_id": "7bbfdcb0-0913-4f13-97fc-4830431ed902",
               "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
               "component_type": "Rigidbody"
-            },
-            "speed": 1
+            }
+          },
+          {
+            "__type": "Sandbox.MovementModes.MovementModeManager",
+            "__guid": "aa56d37b-8929-4570-a3e9-17a45e33dfcf"
           },
           {
             "__type": "Sandbox.Rigidbody",
@@ -254,6 +257,25 @@
                     "__guid": "2507fd8a-4a47-4347-874a-86ae6358b154"
                   }
                 ]
+              }
+            ]
+          },
+          {
+            "__guid": "49a88d5c-fa07-432d-b63c-b6fe71f23fef",
+            "Flags": 0,
+            "Name": "MovementModes",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.MovementModes.GroundMovement",
+                "__guid": "077506d4-e38a-4be7-9e43-fae76ca2c0bd",
+                "GroundSpeed": 1,
+                "MaxSlopeAngle": 360
+              },
+              {
+                "__type": "Sandbox.MovementModes.AirMovement",
+                "__guid": "c45583d5-ec37-4778-85b1-bfbb826ba565",
+                "AirSpeed": 1
               }
             ]
           }
