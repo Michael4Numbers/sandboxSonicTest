@@ -43,9 +43,12 @@ public class HomingAttackMovement : IMovementMode
 			_player.playermodel.Tint = Color.White;
 			_player.playermodel.Set( "homingAttack", true );
 			_player.SetMovementMode<AirMovement>();
+			_player.WorldPosition = homingEnd;
 		}
-
-		_player.WorldPosition = Vector3.Lerp(homingStart, homingEnd, homingLerp / homingDistance);
+		else
+		{
+			_player.WorldPosition = Vector3.Lerp( homingStart, homingEnd, homingLerp / homingDistance );
+		}
 		
 	}
 
