@@ -143,6 +143,9 @@
                   "AfterUILayer": false
                 },
                 "RenderType": "On",
+                "Sequence": {
+                  "Name": null
+                },
                 "Tint": "1,1,1,1",
                 "UseAnimGraph": true
               },
@@ -264,17 +267,13 @@
             "Components": [
               {
                 "__type": "Sandbox.MovementModes.GroundMovement",
-                "__guid": "077506d4-e38a-4be7-9e43-fae76ca2c0bd",
+                "__guid": "c561fc5c-56bf-415b-82c2-6d08c8920cb0",
                 "GroundSpeed": 1,
                 "MaxSlopeAngle": 360
               },
               {
-                "__type": "Sandbox.MovementModes.MovementModeManager",
-                "__guid": "96266cb7-6c35-4094-98f9-ba074671792a"
-              },
-              {
                 "__type": "Sandbox.MovementModes.AirMovement",
-                "__guid": "e221d98e-476a-48eb-85d2-44295ae19f68",
+                "__guid": "d50f8c90-c8b8-4a1c-8151-7bae57829b1a",
                 "AirSpeed": 1
               }
             ]
@@ -355,5 +354,6 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
+  "HasUnsavedChanges": false,
   "__version": 1
 }

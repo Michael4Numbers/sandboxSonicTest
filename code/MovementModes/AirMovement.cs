@@ -30,7 +30,6 @@ public class AirMovement : IMovementMode
 		// Update gravity
 		_player.GravityDir = _player.TargetGravDir;
 		
-		
 		UpdateRotation();
 	}
 

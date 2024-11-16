@@ -44,7 +44,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 		get => Scene.PhysicsWorld.Gravity.Length * GravityDir * GravityScale;
 	}
 
-	private Vector3 _gravityDir;
+	private Vector3 _gravityDir = Vector3.Down;
 	
 #endregion
 	
@@ -70,6 +70,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 	//[Sync]
 	private List<IMovementMode> _movementModes { get; set; }
+	private IMovementMode _activeMovementMode { get; set; }
 
 	protected override void OnAwake()
 	{
@@ -85,12 +86,16 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 		
 		// Add movement modes
 		_movementModes = GetComponentsInChildren<IMovementMode>().ToList();
+		_activeMovementMode = GetComponentInChildren<GroundMovement>();
 		
 		// Initialize modes
 		foreach (var mode in _movementModes)
 		{
 			mode.Init( this );
+			mode.Enabled = false;
 		}
+
+		SetMovementMode<GroundMovement>();
 
 		// example
 		OnLanded += OnLandedListener;
@@ -100,6 +105,8 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	{
 		// example
 		Log.Info( "SONIC HAS LANDED!" );
+
+		SetMovementMode<GroundMovement>();
 	}
 
 	protected override void OnPreRender()
@@ -112,33 +119,17 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 	void IScenePhysicsEvents.PrePhysicsStep()
 	{
-		foreach ( var mode in _movementModes )
-		{
-			if (mode.IsEnabled())
-				mode.PrePhysics( );
-		}
+		_activeMovementMode.PrePhysics( );
 	}
 
 	public void PostPhysicsStep()
 	{
-		foreach ( var mode in _movementModes )
-		{
-			if (mode.IsEnabled())
-				mode.PostPhysics( );
-		}
+		_activeMovementMode.PostPhysics( );
 	}
 
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
-		
-		// Enable & Disable the appropriate movement modes
-		foreach (var mode in _movementModes)
-		{
-			bool bValid = mode.EnterCondition();
-			if ( !bValid && mode.IsEnabled() ) mode.Enabled = false;
-			else if (bValid && !mode.IsEnabled()) mode.Enabled = true;
-		}
 	}
 
 	Vector3 CameraRelativeInput(Vector3 rawInput)
@@ -243,5 +234,11 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax )
 	{
 		return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+	}
+
+	public void SetMovementMode<T>() where T : IMovementMode{
+		_activeMovementMode.Enabled = false;
+		_activeMovementMode = GameObject.GetComponentInChildren<T>(true);
+		_activeMovementMode.Enabled = true;
 	}
 }

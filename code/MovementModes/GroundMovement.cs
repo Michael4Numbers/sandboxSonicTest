@@ -29,9 +29,17 @@ public class GroundMovement : IMovementMode
 	{
 		// Find ground
 		_player.EvaluateGroundingStatus();
+
+		if(!_player.IsOnStableGround()){
+			_player.SetMovementMode<AirMovement>();
+		}
 		
-		if (_player.GroundingStatus.Angle > MaxSlopeAngle)
+		if (_player.GroundingStatus.Angle > MaxSlopeAngle){
+			Log.Info(_player.GroundingStatus.Angle);
+			
 			_player.UnGround();
+		}
+			
 		
 		// Update gravity
 		_player.GravityDir = -_player.GroundingStatus.HitResult.Normal;
