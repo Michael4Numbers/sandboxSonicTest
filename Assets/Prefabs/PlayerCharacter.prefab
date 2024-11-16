@@ -118,11 +118,11 @@
               {
                 "__type": "Sandbox.SkinnedModelRenderer",
                 "__guid": "f33d0930-a8a2-4052-ae00-a7922d9564f1",
-                "AnimationGraph": "animgraphs/sk_sonicrig.vanmgrph",
+                "AnimationGraph": "characters/sonic/animgraphs/sk_sonicrig.vanmgrph",
                 "BodyGroups": 18446744073709551615,
                 "CreateAttachments": false,
                 "CreateBoneObjects": false,
-                "Model": "characters/sk_sonicrig.vmdl",
+                "Model": "characters/sonic/sk_sonicrig.vmdl",
                 "Morphs": {},
                 "Parameters": {
                   "bools": {
@@ -179,7 +179,7 @@
                 "__guid": "7766ee37-5871-4820-83ab-b9709574cd29",
                 "BodyGroups": 18446744073709551615,
                 "CreateAttachments": false,
-                "Model": "characters/ball/spinball.vmdl",
+                "Model": "characters/sonic/ball/spinball.vmdl",
                 "RenderOptions": {
                   "GameLayer": true,
                   "OverlayLayer": false,

@@ -8,8 +8,8 @@ Layer0
 	F_MORPH_SUPPORTED 1
 
 	//---- Material ----
-	SonicTexture "characters/textures/t_sonicv2_c.png"
-	TextureColor "characters/textures/t_sonicv2_c.png"
+	SonicTexture "characters/sonic//textures/t_sonicv2_c.png"
+	TextureColor "characters/sonic/textures/t_sonicv2_c.png"
 	TextureNormal "materials/default/default_normal.tga"
 	TextureTintMask "materials/default/default.tga"
 	TextureTranslucency "materials/default/default_trans.tga"

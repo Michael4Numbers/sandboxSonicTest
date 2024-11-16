@@ -2,10 +2,10 @@
 
 Layer0
 {
-	shader "characters/ball/shaders/ball.shader"
+	shader "shaders/spinner.shader"
 
 	g_flSpeed "20.000"
-	Texture "characters/ball/textures/sonicball.png"
+	Texture "characters/sonic/ball/textures/sonicball.png"
 
 	//---- Fog ----
 	g_bFogEnabled "1"

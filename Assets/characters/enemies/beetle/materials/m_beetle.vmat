@@ -1,0 +1,13 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/celshading.shader"
+
+	//---- Material ----
+	SonicTexture "characters/enemies/beetle/textures/t_beetle_c.png"
+	TextureColor "characters/enemies/beetle/textures/t_beetle_c.png"
+	TextureNormal "materials/default/default_normal.tga"
+	TextureTintMask "materials/default/default.tga"
+	TextureTranslucency "materials/default/default_trans.tga"
+}
