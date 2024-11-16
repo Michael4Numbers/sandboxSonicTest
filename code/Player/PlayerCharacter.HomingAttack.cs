@@ -16,7 +16,7 @@ public sealed partial class PlayerCharacter
 
         GameObject homingTarget;
 
-		Vector3 homingDirection = InputVector.Length > 0 ? Vector3.Lerp( InputVector, GameObject.WorldRotation.Forward, 0.5f ).Normal : GameObject.WorldRotation.Forward;
+		Vector3 homingDirection = InputVector.Length > 0 ? Vector3.Lerp( InputVector, GameObject.WorldRotation.Forward, 0.3f ).Normal : GameObject.WorldRotation.Forward;
 
 		Vector3 startTrace = GameObject.WorldPosition + (homingDirection * 200.0f);
 		Vector3 endTrace = startTrace + (homingDirection * 1000.0f);

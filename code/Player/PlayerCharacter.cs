@@ -224,9 +224,6 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 			AttemptHomingAttack();
 		}
 
-		Gizmo.Draw.LineSphere( lastSphere );
-		Gizmo.Draw.LineSphere( lastEndSphere );
-
 		TrySpinDash();
 	}
 

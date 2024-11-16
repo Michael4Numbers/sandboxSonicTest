@@ -5,6 +5,8 @@ namespace Sandbox.MovementModes;
 public class HomingAttackMovement : IMovementMode
 {
 	[Property] private float HomingSpeed { get; set; } = 1f;
+	[Property] private float HomingAirLaunch { get; set; } = 1200f;
+	[Property] private float HomingForwardLaunch { get; set; } = 2000f;
 
 	private float homingDistance { get; set; }
 	private float homingLerp { get; set; }
@@ -29,14 +31,12 @@ public class HomingAttackMovement : IMovementMode
 
 	protected override void OnUpdate(){
 
-		homingLerp += Time.Delta * HomingSpeed;
+		homingLerp += Time.Delta * HomingSpeed * 500;
 
-		_player.WorldPosition = Vector3.Lerp(homingStart, homingEnd, homingLerp);
-
-		if ( homingLerp > 1f )
+		if ( homingLerp >= homingDistance )
 		{
 			Vector3 launchDirection = Vector3.Direction( homingStart, homingEnd );
-			_player.rigid.Velocity = (launchDirection.WithZ( 0f ).Normal * 2000) + (Vector3.Up * 1000f);
+			_player.rigid.Velocity = (launchDirection.WithZ( 0f ).Normal * HomingForwardLaunch) + (-_player.GravityDir * HomingAirLaunch);
 			_player.ClearAirDash();
 			_player.homingTarget = null;
 			_player.ball.Enabled = false;
@@ -44,6 +44,8 @@ public class HomingAttackMovement : IMovementMode
 			_player.playermodel.Set( "homingAttack", true );
 			_player.SetMovementMode<AirMovement>();
 		}
+
+		_player.WorldPosition = Vector3.Lerp(homingStart, homingEnd, homingLerp / homingDistance);
 		
 	}
 

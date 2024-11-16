@@ -1,0 +1,77 @@
+{
+  "RootObject": {
+    "__guid": "71cb8786-c8d7-4b32-baf6-d231453309c3",
+    "Flags": 0,
+    "Name": "DummyTarget",
+    "Position": "0,256,128",
+    "Tags": "targetable",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.CapsuleCollider",
+        "__guid": "26c51f3c-199a-4ff8-bd4e-060a313293f2",
+        "End": "0,0,0",
+        "IsTrigger": true,
+        "Radius": 24,
+        "Start": "0,0,0",
+        "Static": false,
+        "SurfaceVelocity": "0,0,0"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "94e1f6bb-8062-41ce-ad43-6fd4a21b19b1",
+        "Flags": 0,
+        "Name": "sk_beetle",
+        "Position": "0,0,-20",
+        "Scale": "0.4,0.4,0.4",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "7cce6baf-6a17-401a-8f14-9268f5ea9930",
+            "AnimationGraph": "characters/enemies/beetle/animgraphs/ag_beetle.vanmgrph",
+            "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "CreateBoneObjects": false,
+            "Model": "characters/enemies/beetle/sk_beetle.vmdl",
+            "Morphs": {},
+            "Parameters": {
+              "bools": {},
+              "ints": {},
+              "floats": {},
+              "vectors": {},
+              "rotations": {}
+            },
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Sequence": {
+              "Name": null
+            },
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          }
+        ]
+      },
+      {
+        "__guid": "9279b1ec-3e8a-4607-b403-57f42527dd96",
+        "Flags": 0,
+        "Name": "HomingPosition",
+        "Enabled": true
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "HasUnsavedChanges": false,
+  "__version": 1
+}

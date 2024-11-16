@@ -279,6 +279,8 @@
               {
                 "__type": "Sandbox.MovementModes.HomingAttackMovement",
                 "__guid": "fbd05907-af8b-45f6-a286-f087c6ac3820",
+                "HomingAirLaunch": 1200,
+                "HomingForwardLaunch": 2000,
                 "HomingSpeed": 10
               }
             ]
