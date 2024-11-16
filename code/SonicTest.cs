@@ -18,12 +18,11 @@ public sealed class SonicTest : Component
 		base.OnAwake();
 		Model.OnGenericEvent = ( a ) =>
 		{
-			if(_player.rigid.Velocity.Length > 50 )
+			if ( _player.rigid.Velocity.Length > 50 )
 			{
 				//PlayerController.PlayFootstepSound( WorldPosition, 1.0f, 1 );
 				Sound.Play( "footstep-concrete", WorldPosition );
 			}
-			
 		};
 
 		_player = GetComponentInParent<PlayerCharacter>();

@@ -66,7 +66,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 	private bool jumped = false;
 
-	private bool airDashed = false;
+	
 
 	//[Sync]
 	private List<IMovementMode> _movementModes { get; set; }
@@ -221,13 +221,12 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 		if ( Input.Pressed( "attack1" ) && !IsOnStableGround() && !airDashed )
 		{
-			Sound.Play( "player_airdash", WorldPosition );
-			rigid.Velocity = (WorldRotation.Forward * 3000f).WithZ(0);
-			airDashed = true;
-			ball.Enabled = true;
-			playermodel.Tint = Color.Transparent;
+			AttemptHomingAttack();
 		}
-		
+
+		Gizmo.Draw.LineSphere( lastSphere );
+		Gizmo.Draw.LineSphere( lastEndSphere );
+
 		TrySpinDash();
 	}
 
@@ -237,8 +236,12 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	}
 
 	public void SetMovementMode<T>() where T : IMovementMode{
-		_activeMovementMode.Enabled = false;
-		_activeMovementMode = GameObject.GetComponentInChildren<T>(true);
-		_activeMovementMode.Enabled = true;
+		IMovementMode componentGrab = GameObject.GetComponentInChildren<T>( true );
+		if ( componentGrab != null )
+		{
+			_activeMovementMode.Enabled = false;
+			_activeMovementMode = componentGrab;
+			_activeMovementMode.Enabled = true;
+		}
 	}
 }

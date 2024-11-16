@@ -275,6 +275,11 @@
                 "__type": "Sandbox.MovementModes.AirMovement",
                 "__guid": "d50f8c90-c8b8-4a1c-8151-7bae57829b1a",
                 "AirSpeed": 1
+              },
+              {
+                "__type": "Sandbox.MovementModes.HomingAttackMovement",
+                "__guid": "fbd05907-af8b-45f6-a286-f087c6ac3820",
+                "HomingSpeed": 10
               }
             ]
           }
