@@ -85,7 +85,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 		rigid.PhysicsBody.GravityScale = 0;
 		
 		// Add movement modes
-		_movementModes = GetComponentsInChildren<IMovementMode>().ToList();
+		_movementModes = GetComponentsInChildren<IMovementMode>(true).ToList();
 		_activeMovementMode = GetComponentInChildren<GroundMovement>();
 		
 		// Initialize modes
