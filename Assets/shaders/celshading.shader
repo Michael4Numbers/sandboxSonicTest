@@ -9,6 +9,13 @@ FEATURES
 COMMON
 {
 	#include "common/shared.hlsl"
+	#define CUSTOM_MATERIAL_INPUTS
+
+	
+	float fresnel(float amount, float3 normal, float3 view)
+	{
+		return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0 )), amount);
+	}
 }
 
 struct VertexInput
@@ -43,19 +50,31 @@ PS
 
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-		Material m = Material::From( i );
-
-		float3 normal = m.Normal;
+		Material m = Material::From( i, 0, float4(0,0,1, 1), 0 );
+		//return ShadingModelStandard::Shade( i, m );
+		float3 normal = i.vNormalWs;
+		float3 worldPosition = i.vPositionWithOffsetWs + g_vHighPrecisionLightingOffsetWs.xyz;
 		float3 lightResult = 0;
+		float rawLight = 0;
 
-		for ( uint index = 0; index < DynamicLight::Count( m.ScreenPosition ); index++ )
+		for ( uint index = 0; index < DynamicLight::Count( i.vPositionSs ); index++ )
 		{
-			Light light = DynamicLight::From( m.ScreenPosition, m.WorldPosition, index );
+			Light light = DynamicLight::From( i.vPositionSs, worldPosition, index );
 
 			float NoL = step(0, dot(light.Direction, normal));
 			float shadowTerm = step(0.4, light.Visibility);
-			lightResult += light.Color * max(0.5, NoL * shadowTerm * light.Attenuation);
+			float atten = smoothstep(0.19, 0.2, light.Attenuation);
+
+			rawLight += light.Color * NoL * shadowTerm * atten;
+			lightResult += light.Color * max(0.5, NoL * shadowTerm) * atten;
 		}
+
+		// Rim light
+		float3 V = g_vCameraDirWs;
+		float fresnelRes = 1-dot(normal, normalize(V));
+		fresnelRes = (1 - smoothstep(0.49, 0.5, 0.35 * fresnelRes)) * rawLight;
+
+		lightResult += fresnelRes * 5;
 
 		// Sample texture
 		lightResult *= baseColor.Sample(g_sAniso, i.vTextureCoords.xy);
