@@ -48,6 +48,8 @@ PS
 	CreateInputTexture2D( SonicTexture, Srgb, 8, "", "_color", "Material,10/10", Default3( 1.0, 1.0, 1.0 ) );
 	Texture2D baseColor < Channel( RGB, Box( SonicTexture ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >; 
 
+	float rimStrength < UiGroup( ",0/,0/0" ); Default1( 3 ); Range1( 0, 10 ); >;
+
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		Material m = Material::From( i, 0, float4(0,0,1, 1), 0 );
@@ -74,7 +76,7 @@ PS
 		float fresnelRes = 1-dot(normal, normalize(V));
 		fresnelRes = (1 - smoothstep(0.49, 0.5, 0.35 * fresnelRes)) * rawLight;
 
-		lightResult += fresnelRes * 5;
+		lightResult += fresnelRes * rimStrength;
 
 		// Sample texture
 		lightResult *= baseColor.Sample(g_sAniso, i.vTextureCoords.xy);
