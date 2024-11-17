@@ -166,7 +166,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 	Vector3 CameraRelativeInput(Vector3 rawInput)
 	{
-		Vector3 targetNormal = IsOnStableGround() ? _groundingStatus.HitResult.Normal : -GravityDir;
+		Vector3 targetNormal = IsOnStableGround() ? _groundingStatus.HitResult.Normal : -TargetGravDir;
 		Rotation rotation = Scene.Camera.WorldRotation;
 		
 		Rotation planeRot = Rotation.FromToRotation( rotation.Up, targetNormal );

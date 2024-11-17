@@ -1,7 +1,10 @@
-﻿namespace Sandbox.MovementModes;
+﻿using System;
+
+namespace Sandbox.MovementModes;
 
 public class GroundMovement : IMovementMode
 {
+	[Property] private float BrakingFriction { get; set; } = 900f;
 	[Property] private float GroundSpeed { get; set; } = 1f;
 	[Property, Range(0,360)] private float MaxSlopeAngle { get; set; } = 60f;
 	
@@ -60,34 +63,21 @@ public class GroundMovement : IMovementMode
 		// Limiting turn rate during the spindash grace period
 		float turnRate = _player._timeUntilDashOver > 0 ? .05f : 0.2f;
 
-		if ( targetVel.Length > 0 )
+		float inputAngle = velocity.IsNearlyZero(  ) ? 0 : Vector3.GetAngle( _player.InputVector, velocity.Normal );
+		
+		if ( targetVel.Length > 0  && inputAngle < 160 ) // another arbitrary magic number, 20 degree window
 		{
-			var initDirection = velocity.Normal;
-			var targetDirection = targetVel;
+			var initDirection = Vector3.VectorPlaneProject(velocity.Normal, _player.GroundingStatus.HitResult.Normal).Normal;
+			var targetDirection = Vector3.VectorPlaneProject(targetVel, _player.GroundingStatus.HitResult.Normal).Normal;
 			velocity = (Vector3.Slerp( initDirection, targetDirection, turnRate ) * newSpeed);
 		}
 		else if (_player._timeUntilDashOver <= 0) // NOTE: Just removing braking when we're still in the spindash grace period
 		{
-			velocity = (velocity * 0.95f);
+			float brakingMultiplier = targetVel.Length > 0 ? 4 : 1;
+			ApplyBraking( ref velocity , brakingMultiplier);
 		}
 		
-		// Slope physics
-		float slopeSlideVelThreshold = 400;
-		if ( velocity.Length > slopeSlideVelThreshold )
-		{
-			// Add slope physics, but only in the sense that we speed up/slow down not change directions
-			if ( velocity.Length > 4000 ) return;
-		
-			float dH = (velocity * Time.Delta).Dot( _player.TargetGravDir );
-			float dV = float.Sign( dH ) * float.Sqrt( 10 * float.Abs(dH) );
-			velocity = velocity.Normal * (velocity.Length + dV);
-		}
-		else
-		{
-			// Apply gravity directly if we're not moving so we slide down slopes if standing still [optional]
-			Vector3 gravOnPlane = _player.TargetGravDir.PlaneProject( _player.GroundingStatus.HitResult.Normal ) * _player.Gravity.Length;
-			velocity += gravOnPlane * Time.Delta;
-		}
+		ApplySlopePhysics( ref velocity );
 	}
 
 	public override void UpdateRotation()
@@ -106,5 +96,31 @@ public class GroundMovement : IMovementMode
 		
 		Rotation targetRot = Rotation.LookAt( targetForward, targetUp );
 		_player.WorldRotation = Rotation.Slerp( _player.WorldRotation, targetRot, 15f * Time.Delta );
+	}
+
+	void ApplyBraking( ref Vector3 velocity , float brakingMultiplier = 1)
+	{
+		velocity = velocity.Normal * Math.Max(0, velocity.Length - brakingMultiplier * BrakingFriction * Time.Delta);
+	}
+
+	void ApplySlopePhysics( ref Vector3 velocity )
+	{
+		// Slope physics
+		float slopeSlideVelThreshold = 400;
+		if ( velocity.Length > slopeSlideVelThreshold )
+		{
+			// Add slope physics, but only in the sense that we speed up/slow down not change directions
+			if ( velocity.Length > 4000 ) return;
+		
+			float dH = (velocity * Time.Delta).Dot( _player.TargetGravDir );
+			float dV = float.Sign( dH ) * float.Sqrt( 10 * float.Abs(dH) );
+			velocity = velocity.Normal * (velocity.Length + dV);
+		}
+		else
+		{
+			// Apply gravity directly if we're not moving so we slide down slopes if standing still [optional]
+			Vector3 gravOnPlane = _player.TargetGravDir.PlaneProject( _player.GroundingStatus.HitResult.Normal ) * _player.Gravity.Length;
+			velocity += gravOnPlane * Time.Delta;
+		}
 	}
 }
