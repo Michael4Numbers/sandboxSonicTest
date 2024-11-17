@@ -93,15 +93,17 @@ public class GroundMovement : IMovementMode
 	public override void UpdateRotation()
 	{
 		Vector3 targetUp = _player.GroundingStatus.HitResult.Normal;
-		Vector3 targetForward = _rb.Velocity.IsNearlyZero() ? _player.WorldRotation.Forward : _rb.Velocity.Normal;
+		// Bit of a high tolerance but because theres gonna always be some subtle movement unless we apply braking frction, equiv to 1.2 m/s
+		Vector3 targetForward = _rb.Velocity.IsNearlyZero(50) ? _player.WorldRotation.Forward : _rb.Velocity.Normal;
 
-		if ( _player.bSpinDashCharging )
+		if ( _player.bSpinDashCharging  && _player.InputVector.Length > 0)
 		{
 			targetForward = _player.InputVector;
 		}
-		
-		targetForward = targetForward.PlaneProject( targetUp ).Normal;
 
+		targetForward = Vector3.VectorPlaneProject( targetForward, targetUp ).Normal;
+
+		
 		Rotation targetRot = Rotation.LookAt( targetForward, targetUp );
 		_player.WorldRotation = Rotation.Slerp( _player.WorldRotation, targetRot, 15f * Time.Delta );
 	}
