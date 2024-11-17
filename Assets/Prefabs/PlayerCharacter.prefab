@@ -33,6 +33,7 @@
               "_type": "gameobject",
               "go": "9eeb9253-01f3-48e1-b404-d55ef4b1aca4"
             },
+            "bDisplayTrajectory": false,
             "capsuleCollider": {
               "_type": "component",
               "component_id": "123ababf-59ad-4f24-8ade-64225fc7ccc0",
@@ -220,8 +221,7 @@
                       "component_id": "f78fcd24-97f6-4e4b-a5a7-4a7809c5d1a3",
                       "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
                       "component_type": "PlayerCharacter"
-                    },
-                    "MyStringValue": "Hello World!"
+                    }
                   }
                 ]
               },
@@ -275,7 +275,9 @@
                 "__type": "Sandbox.MovementModes.AirMovement",
                 "__guid": "d50f8c90-c8b8-4a1c-8151-7bae57829b1a",
                 "__enabled": false,
-                "AirSpeed": 1
+                "AirAccel": 3500,
+                "AirBraking": 900,
+                "AirFriction": 10
               },
               {
                 "__type": "Sandbox.MovementModes.HomingAttackMovement",

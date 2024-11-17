@@ -112,15 +112,41 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 		SetMovementMode<GroundMovement>();
 	}
+	
+	#region Debugging
 
+	[Property, Hide, ConVar("vizTrajectory", Help = "Draw players trajectory in game", Min = 0, Max = 1, Saved = true)]
+	private static bool bDisplayTrajectory { get; set; } = false;
+	//List<Vector3> positionHistory = new List<Vector3>(400);
+	private Queue<Vector3> positionHistory = new Queue<Vector3>( 200 );
+
+	void DebugFixedUpdate()
+	{
+		if (positionHistory.Count > 200) positionHistory.Dequeue();
+		positionHistory.Enqueue( WorldPosition - TargetGravDir * 35 );
+	}
+	
 	protected override void OnPreRender()
 	{
 		base.OnPreRender();
-		
-		Gizmo.Draw.Color = ( Color.Orange );
+
+		Gizmo.Draw.Color = (Color.Orange);
 		Gizmo.Draw.Arrow( GameObject.WorldPosition, GameObject.WorldPosition + GravityDir * 75, 8, 3 );
+		
+		if ( bDisplayTrajectory )
+		{
+			var posList = positionHistory.ToList();
+
+			for ( int i = 0; i < posList.Count - 1; i++ )
+			{
+				Gizmo.Draw.LineThickness = 10;
+				Gizmo.Draw.Line( posList[i], posList[i + 1] );
+			}
+		}
 	}
 
+	#endregion 
+	
 	void IScenePhysicsEvents.PrePhysicsStep()
 	{
 		_activeMovementMode.PrePhysics( );
@@ -134,6 +160,8 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
+		
+		DebugFixedUpdate(); // Updates various debug values
 	}
 
 	Vector3 CameraRelativeInput(Vector3 rawInput)
@@ -245,6 +273,10 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 			_activeMovementMode = componentGrab;
 			_activeMovementMode.Enabled = true;
 		}
+	}
+	
+	public T GetMovementMode<T>() where T : IMovementMode{
+		return GameObject.GetComponentInChildren<T>( true );
 	}
 
 

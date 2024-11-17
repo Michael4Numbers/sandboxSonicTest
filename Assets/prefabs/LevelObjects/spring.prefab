@@ -18,6 +18,7 @@
       {
         "__type": "Spring",
         "__guid": "a13a43eb-153e-4318-b939-7303f335b999",
+        "finalLocation": "1000,0,0",
         "LaunchSpeed": 2500
       }
     ],
@@ -54,6 +55,16 @@
           {
             "Id": "a13a43eb-153e-4318-b939-7303f335b999",
             "Property": "LaunchSpeed"
+          }
+        ]
+      },
+      {
+        "Id": "final_location",
+        "Title": "final_location",
+        "Targets": [
+          {
+            "Id": "a13a43eb-153e-4318-b939-7303f335b999",
+            "Property": "finalLocation"
           }
         ]
       }
