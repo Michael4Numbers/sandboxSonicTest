@@ -13,6 +13,12 @@ public class GroundMovement : IMovementMode
 		return _player.IsOnStableGround();
 	}
 
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+		_rb.Velocity = Vector3.VectorPlaneProject( _rb.Velocity, _player.GroundingStatus.HitResult.Normal );
+	}
+
 	public override void PrePhysics()
 	{
 		_player.CalculateInputVector();
@@ -59,7 +65,7 @@ public class GroundMovement : IMovementMode
 	public override void CalcVelocity(ref Vector3 velocity)
 	{
 		Vector3 targetVel = _player.bSpinDashCharging ? 0 : _player.InputVector * GroundSpeed; // zero input vector if charging a spindash
-		
+
 		var newSpeed = (velocity.Length + (GroundSpeed * 20 * PlayerCharacter.MapRange( velocity.Length, 0, 4000, 1, 0 )));
 
 		// Limiting turn rate during the spindash grace period
