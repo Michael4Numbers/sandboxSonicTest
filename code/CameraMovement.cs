@@ -66,9 +66,18 @@ public sealed class CameraMovement : Component, IScenePhysicsEvents
 		Camera.FieldOfView = MathX.Lerp(Camera.FieldOfView, targetFov, 5 *  Time.Delta);
 
 		// Acknowledge look input
-		_inputDelta.pitch = Input.MouseDelta.y * LookSensitivity.y * Time.Delta;
-		_inputDelta.yaw = -Input.MouseDelta.x * LookSensitivity.x * Time.Delta;
-		
+
+		if ( !Input.UsingController )
+		{
+			_inputDelta.pitch = Input.MouseDelta.y * LookSensitivity.y * Time.Delta;
+			_inputDelta.yaw = -Input.MouseDelta.x * LookSensitivity.x * Time.Delta;
+		}
+		else
+		{
+			_inputDelta.pitch = Input.AnalogLook.pitch * LookSensitivity.y * Time.Delta;
+			_inputDelta.yaw = Input.AnalogLook.yaw * LookSensitivity.x * Time.Delta;
+		}
+
 		if (!_inputDelta.IsNearlyZero(  )) _sinceLastInput = 0;
 
 		_camRot += _inputDelta;
