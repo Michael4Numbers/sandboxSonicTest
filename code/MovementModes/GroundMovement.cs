@@ -20,7 +20,8 @@ public class GroundMovement : IMovementMode
 		// Calculate velocities (directly set it)
 		Vector3 vel = _rb.Velocity;
 		
-		CalcVelocity( ref vel );
+		if (_player.IsOnStableGround())
+			CalcVelocity( ref vel );
 		
 		// Set velocity accordingly
 		_rb.Velocity = vel;
@@ -35,6 +36,7 @@ public class GroundMovement : IMovementMode
 
 		if(!_player.IsOnStableGround()){
 			_player.SetMovementMode<AirMovement>();
+			return;
 		}
 		
 		if (_player.GroundingStatus.Angle > MaxSlopeAngle){
