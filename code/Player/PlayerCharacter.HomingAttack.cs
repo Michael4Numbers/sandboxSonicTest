@@ -33,13 +33,15 @@ public sealed partial class PlayerCharacter
 
 		homingTarget = null;
 
-        float distanceToTarget = float.PositiveInfinity;
+        float distanceToTarget = 99999f;
 
         foreach (SceneTraceResult boxHit in boxHits){
-            Log.Info(boxHit.GameObject.Name);
+           // Log.Info(boxHit.GameObject.Name);
             if(boxHit.Distance < distanceToTarget){
                 homingTarget = boxHit.GameObject;
-            }
+				distanceToTarget = boxHit.Distance;
+
+			}
         }
 
 		return homingTarget;

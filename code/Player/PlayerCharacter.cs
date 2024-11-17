@@ -56,13 +56,17 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	[Sync]
 	public Vector3 InputVector { get; set; } = Vector3.Zero;
 
-	private int maxBounces = 5;
 
+	public float levelTimer = 0f;
+
+	public int rings = 0;
+
+
+	private int maxBounces = 5;
 
 	private float skinWidth = 0.015f;
 
 	private float timeSinceLastJump = 0f;
-
 
 	private bool jumped = false;
 
@@ -198,6 +202,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	
 	protected override void OnUpdate()
 	{
+		levelTimer += Time.Delta;
 		timeSinceLastJump += Time.Delta;
 
 		if ( Input.Pressed( "Jump" ) && IsOnStableGround() )
@@ -241,4 +246,6 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 			_activeMovementMode.Enabled = true;
 		}
 	}
+
+
 }

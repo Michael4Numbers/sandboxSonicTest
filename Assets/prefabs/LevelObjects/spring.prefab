@@ -1,0 +1,93 @@
+{
+  "RootObject": {
+    "__guid": "9b131051-0fdf-4bcf-8a87-6d08b51884a3",
+    "Flags": 0,
+    "Name": "spring",
+    "Tags": "targetable",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "19ce021e-7127-4531-9889-a985fc460b65",
+        "Center": "0,0,16",
+        "IsTrigger": true,
+        "Radius": 48,
+        "Static": false,
+        "SurfaceVelocity": "0,0,0"
+      },
+      {
+        "__type": "Spring",
+        "__guid": "a13a43eb-153e-4318-b939-7303f335b999",
+        "LaunchSpeed": 2500
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "aae3cb3a-2d45-456e-b6ca-25ab9c858216",
+        "Flags": 0,
+        "Name": "sk_spring",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "fa343688-66f1-4721-9624-2448169e6fdf",
+            "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "Model": "models/levelobjects/spring/sk_spring.vmdl",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ],
+    "__variables": [
+      {
+        "Id": "launch_speed",
+        "Title": "launch_speed",
+        "Targets": [
+          {
+            "Id": "a13a43eb-153e-4318-b939-7303f335b999",
+            "Property": "LaunchSpeed"
+          }
+        ]
+      }
+    ],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "HasUnsavedChanges": false,
+  "__version": 1
+}

@@ -1,0 +1,58 @@
+{
+  "RootObject": {
+    "__guid": "53ed0aaf-cbe6-4f55-b977-cc8c09d886ed",
+    "Flags": 0,
+    "Name": "Ring",
+    "Position": "128,0,0",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "eb82c1d3-e4aa-4500-b45e-0c2cd58ed4d8",
+        "Center": "0,0,26",
+        "IsTrigger": true,
+        "Scale": "32,32,52",
+        "Static": false,
+        "SurfaceVelocity": "0,0,0"
+      },
+      {
+        "__type": "Ring",
+        "__guid": "155841a2-4840-4fce-aab5-2ac76f90863f"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "10c1c50a-8a56-479f-92ff-422d9214308a",
+        "Flags": 0,
+        "Name": "sm_ring",
+        "Position": "0,0,32",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "d047efe3-722f-495e-94c0-797ddcd3e149",
+            "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "Model": "models/levelobjects/ring/sm_ring.vmdl",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "HasUnsavedChanges": false,
+  "__version": 1
+}

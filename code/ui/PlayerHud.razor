@@ -1,11 +1,20 @@
 ﻿@using Sandbox;
 @using Sandbox.UI;
+@using System;
 @inherits PanelComponent
 @namespace Sandbox
 
 <root>
 	<div class="vitals">
 		<p>🦔 HedgeBox 0.1</p>
+	</div>
+	<div class="runInfo">
+		<div class="bar timerHolder">
+			<div class="timer">Time @(formattedMinutes):@formattedSeconds.@formattedMilliseconds</div>
+		</div>
+		<div class="bar ringsHolder">
+			<div class="rings">Rings @(player.rings)</div>
+		</div>
 	</div>
 	<div class="speedBar">
 		<div class="SpeedText">
@@ -23,18 +32,25 @@
 {
 	[Property] PlayerCharacter player;
 
-	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World! If I change I Update the UI";
+	string formattedMinutes = "";
+	string formattedSeconds = "";
+	string formattedMilliseconds = "";
 
 	float Speed = 0;
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash() => System.HashCode.Combine(Speed);
+	protected override int BuildHash() => System.HashCode.Combine(Speed, formattedMilliseconds, player.rings);
 
 	protected override void OnUpdate()
 	{
 		var target = MapRange(player.rigid.Velocity.Length, 0, 3500, 0, 100).Clamp(0, 100);
 		Speed = MathX.Lerp(Speed, target, 20 * Time.Delta);
+
+		formattedMinutes = ((int)(player.levelTimer / 60)).ToString("D2");
+		formattedSeconds = ((int)(player.levelTimer % 60)).ToString("D2");
+		formattedMilliseconds = ((int)((player.levelTimer - Math.Floor(player.levelTimer)) * 1000)).ToString("D3");
+
 	}
 
 	public static float MapRange(float value, float inMin, float inMax, float outMin, float outMax)
