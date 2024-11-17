@@ -109,7 +109,7 @@
       "__guid": "71cb8786-c8d7-4b32-baf6-d231453309c3",
       "Flags": 0,
       "Name": "DummyTarget",
-      "Position": "0,256,128",
+      "Position": "224,-256,128",
       "Tags": "targetable",
       "Enabled": true,
       "__Prefab": "prefabs/enemies/enemy_dummytarget.prefab",

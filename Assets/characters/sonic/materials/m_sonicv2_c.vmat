@@ -7,10 +7,8 @@ Layer0
 	//---- Animation ----
 	F_MORPH_SUPPORTED 1
 
+	rimStrength "2.000"
+
 	//---- Material ----
 	SonicTexture "characters/sonic//textures/t_sonicv2_c.png"
-	TextureColor "characters/sonic/textures/t_sonicv2_c.png"
-	TextureNormal "materials/default/default_normal.tga"
-	TextureTintMask "materials/default/default.tga"
-	TextureTranslucency "materials/default/default_trans.tga"
 }
