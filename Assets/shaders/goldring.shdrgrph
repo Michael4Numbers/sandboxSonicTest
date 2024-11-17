@@ -1,0 +1,651 @@
+{
+  "Model": "models/levelobjects/ring/sm_ring.vmdl",
+  "Description": "",
+  "BlendMode": "Opaque",
+  "nodes": [
+    {
+      "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0.3564102,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "3072,-156",
+      "Albedo": {
+        "Identifier": "24",
+        "Output": "Result"
+      },
+      "PositionOffset": {
+        "Identifier": "17",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Time",
+      "Identifier": "1",
+      "Position": "-1080,60"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 1,
+      "Name": "RotationSpeed",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "2",
+      "Position": "-1080,180"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "3",
+      "Position": "-816,120",
+      "A": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "2",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "WorldPosition",
+      "Identifier": "4",
+      "Position": "-300,1008"
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "5",
+      "Position": "0,516",
+      "A": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "3",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "6",
+      "Position": "-240,504"
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "7",
+      "Position": "-60,1044",
+      "A": {
+        "Identifier": "25",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "8",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "8",
+      "Position": "-300,1080"
+    },
+    {
+      "_class": "Cosine",
+      "Identifier": "9",
+      "Position": "228,396",
+      "Input": {
+        "Identifier": "5",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "10",
+      "Position": "432,396",
+      "A": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "11",
+        "Output": "X"
+      }
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "11",
+      "Position": "204,516",
+      "Input": {
+        "Identifier": "7",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Subtract",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "12",
+      "Position": "648,480",
+      "A": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "16",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "AppendVector",
+      "Identifier": "13",
+      "Position": "888,708",
+      "A": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "21",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "AppendVector",
+      "Identifier": "14",
+      "Position": "1224,888",
+      "A": {
+        "Identifier": "13",
+        "Output": "Output"
+      },
+      "B": {
+        "Identifier": "20",
+        "Output": "Z"
+      }
+    },
+    {
+      "_class": "Sine",
+      "Identifier": "15",
+      "Position": "216,672",
+      "Input": {
+        "Identifier": "5",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "16",
+      "Position": "432,588",
+      "A": {
+        "Identifier": "11",
+        "Output": "Y"
+      },
+      "B": {
+        "Identifier": "15",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Subtract",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "17",
+      "Position": "1536,1020",
+      "A": {
+        "Identifier": "14",
+        "Output": "Output"
+      },
+      "B": {
+        "Identifier": "7",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Sine",
+      "Identifier": "18",
+      "Position": "216,828",
+      "Input": {
+        "Identifier": "5",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "19",
+      "Position": "408,852",
+      "A": {
+        "Identifier": "18",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "20",
+        "Output": "X"
+      }
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "20",
+      "Position": "192,936",
+      "Input": {
+        "Identifier": "7",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "21",
+      "Position": "624,972",
+      "A": {
+        "Identifier": "19",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "22",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "22",
+      "Position": "408,1068",
+      "A": {
+        "Identifier": "20",
+        "Output": "Y"
+      },
+      "B": {
+        "Identifier": "23",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Cosine",
+      "Identifier": "23",
+      "Position": "192,1164",
+      "Input": {
+        "Identifier": "5",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float4",
+      "Value": "1,0.53333,0,1",
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
+      "Identifier": "24",
+      "Position": "2352,-360"
+    },
+    {
+      "_class": "ObjectPosition",
+      "Identifier": "25",
+      "Position": "-300,924"
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "1972,920",
+      "Color": "Green",
+      "Title": "Rotate About Z Axis",
+      "Description": "",
+      "Layer": 1,
+      "Identifier": "26",
+      "Position": "-336,324"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "27",
+      "Position": "408,84",
+      "A": {
+        "Identifier": "39",
+        "Output": "Y"
+      },
+      "B": {
+        "Identifier": "31",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "AppendVector",
+      "Identifier": "28",
+      "Position": "1224,-96",
+      "A": {
+        "Identifier": "48",
+        "Output": "Output"
+      },
+      "B": {
+        "Identifier": "39",
+        "Output": "Z"
+      }
+    },
+    {
+      "_class": "Cosine",
+      "Identifier": "29",
+      "Position": "228,-588",
+      "Input": {
+        "Identifier": "33",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "30",
+      "Position": "204,-468",
+      "Input": {
+        "Identifier": "32",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Cosine",
+      "Identifier": "31",
+      "Position": "192,180",
+      "Input": {
+        "Identifier": "33",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "32",
+      "Position": "-60,60",
+      "A": {
+        "Identifier": "49",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "36",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "33",
+      "Position": "0,-468",
+      "A": {
+        "Identifier": "44",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "3",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Sine",
+      "Identifier": "34",
+      "Position": "216,-156",
+      "Input": {
+        "Identifier": "33",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "35",
+      "Position": "408,-132",
+      "A": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "39",
+        "Output": "X"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "36",
+      "Position": "-300,96"
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "37",
+      "Position": "624,-12",
+      "A": {
+        "Identifier": "35",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "27",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Subtract",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "38",
+      "Position": "648,-504",
+      "A": {
+        "Identifier": "46",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "40",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "39",
+      "Position": "192,-48",
+      "Input": {
+        "Identifier": "32",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "40",
+      "Position": "432,-396",
+      "A": {
+        "Identifier": "30",
+        "Output": "Y"
+      },
+      "B": {
+        "Identifier": "43",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "41",
+      "Position": "1944,24",
+      "A": {
+        "Identifier": "51",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "52",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "1972,920",
+      "Color": "Blue",
+      "Title": "Rotate Normal About Z Axis",
+      "Description": "",
+      "Layer": 1,
+      "Identifier": "42",
+      "Position": "-336,-660"
+    },
+    {
+      "_class": "Sine",
+      "Identifier": "43",
+      "Position": "216,-312",
+      "Input": {
+        "Identifier": "33",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "44",
+      "Position": "-240,-480"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 1,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "45",
+      "Position": "1680,84"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "46",
+      "Position": "432,-588",
+      "A": {
+        "Identifier": "29",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "30",
+        "Output": "X"
+      }
+    },
+    {
+      "_class": "Subtract",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "47",
+      "Position": "1536,36",
+      "A": {
+        "Identifier": "28",
+        "Output": "Output"
+      },
+      "B": {
+        "Identifier": "32",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "AppendVector",
+      "Identifier": "48",
+      "Position": "888,-276",
+      "A": {
+        "Identifier": "38",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "37",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "WorldNormal",
+      "Identifier": "49",
+      "Position": "-300,12"
+    },
+    {
+      "_class": "Normalize",
+      "Identifier": "50",
+      "Position": "2052,24",
+      "Input": {
+        "Identifier": "41",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "51",
+      "Position": "1800,-12",
+      "A": {
+        "Identifier": "47",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "45",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "WorldNormal",
+      "Identifier": "52",
+      "Position": "1692,144"
+    },
+    {
+      "_class": "TransformNormal",
+      "InputSpace": "World",
+      "OutputSpace": "Tangent",
+      "DecodeNormal": true,
+      "Identifier": "53",
+      "Position": "2232,24",
+      "Input": {
+        "Identifier": "50",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "54",
+      "Position": "2448,24",
+      "Input": {
+        "Identifier": "53",
+        "Output": "Result"
+      }
+    }
+  ]
+}
