@@ -268,6 +268,11 @@
               {
                 "__type": "Sandbox.MovementModes.GroundMovement",
                 "__guid": "c561fc5c-56bf-415b-82c2-6d08c8920cb0",
+                "Acceleration": 1200,
+                "BrakeForce": 9000,
+                "MaxSpeed": 2500,
+                "minTurnSpeed": 500,
+                "turnDecceleration": 1200,
                 "BrakingFriction": 1200,
                 "GroundSpeed": 1,
                 "MaxSlopeAngle": 360
