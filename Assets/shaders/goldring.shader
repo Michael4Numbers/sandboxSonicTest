@@ -58,42 +58,33 @@ VS
 	
 	PixelInput MainVs( VertexInput v )
 	{
+		float rotAngle = g_flRotationSpeed * g_flTime;
+
+		float c = cos(rotAngle);
+		float s = sin(rotAngle);
+
+		float tBob = 3 * (sin(2 * rotAngle) + cos(2 * rotAngle));
+
+		float4x4 animMatrix = float4x4(
+			c, -s, 0, 0,
+			s, c, 0, 0,
+			0, 0, 1, tBob,
+			0, 0, 0, 1
+		);
+		float3x3 rotMatrix = (float3x3)animMatrix;
+
+		//v.vNormalOs.xyz = float3(c,s,0);
+
+		v.vPositionOs = mul(animMatrix, float4(v.vPositionOs, 1)).xyz;
+		//v.vNormalOs.xyz = normalize(mul(rotMatrix, v.vNormalOs.xyz));
+
 		PixelInput i = ProcessVertex( v );
-		i.vPositionOs = v.vPositionOs.xyz;
-		i.vColor = v.vColor;
+		i = FinalizeVertex(i);
 
-		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
-		i.vTintColor = extraShaderData.vTint;
+		// weirdly only works when rotating it after ProcessVertex, manually might need to call VS_DecodeObjectSpaceNormalAndTangent...
+		i.vNormalWs.xyz = normalize(mul(rotMatrix, i.vNormalWs.xyz));
 
-		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
-		
-		float l_0 = g_flRotationSpeed;
-		float l_1 = g_flTime * l_0;
-		float l_2 = 0 + l_1;
-		float l_3 = cos( l_2 );
-		float3 l_4 = i.vPositionOs;
-		float3 l_5 = l_4 + float3( 0, 0, 0 );
-		float l_6 = l_5.x;
-		float l_7 = l_3 * l_6;
-		float l_8 = l_5.y;
-		float l_9 = sin( l_2 );
-		float l_10 = l_8 * l_9;
-		float l_11 = l_7 - l_10;
-		float l_12 = sin( l_2 );
-		float l_13 = l_5.x;
-		float l_14 = l_12 * l_13;
-		float l_15 = l_5.y;
-		float l_16 = cos( l_2 );
-		float l_17 = l_15 * l_16;
-		float l_18 = l_14 + l_17;
-		float2 l_19 = float2( l_11, l_18 );
-		float l_20 = l_5.z;
-		float3 l_21 = float3( l_19, l_20 );
-		float3 l_22 = l_21 - l_5;
-		i.vPositionWs.xyz += l_22;
-		i.vPositionPs.xyzw = Position3WsToPs( i.vPositionWs.xyz );
-		
-		return FinalizeVertex( i );
+		return i;
 	}
 }
 
@@ -101,40 +92,42 @@ PS
 {
 	#include "common/pixel.hlsl"
 
+	float rimStrength < UiGroup( ",0/,0/0" ); Default1( 3 ); Range1( 0, 10 ); >;
+
+
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-		Material m = Material::Init();
-		m.Albedo = float3( 1, 1, 1 );
-		m.Normal = float3( 0, 0, 1 );
-		m.Roughness = 1;
-		m.Metalness = 0;
-		m.AmbientOcclusion = 1;
-		m.TintMask = 1;
-		m.Opacity = 1;
-		m.Emission = float3( 0, 0, 0 );
-		m.Transmission = 0;
+		float3 goldColor = float3( 1, 0.53333, 0 );
 		
-		float4 l_0 = float4( 1, 0.53333, 0, 1 );
-		
-		m.Albedo = l_0.xyz;
-		m.Opacity = 1;
-		m.Roughness = 1;
-		m.Metalness = 0.3564102;
-		m.AmbientOcclusion = 1;
-		
-		m.AmbientOcclusion = saturate( m.AmbientOcclusion );
-		m.Roughness = saturate( m.Roughness );
-		m.Metalness = saturate( m.Metalness );
-		m.Opacity = saturate( m.Opacity );
+		Material m = Material::From( i, 0, float4(0,0,1, 1), 0 );
 
-		// Result node takes normal as tangent space, convert it to world space now
-		m.Normal = TransformNormal( m.Normal, i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
+		float3 normal = i.vNormalWs;
+		float3 worldPosition = i.vPositionWithOffsetWs + g_vHighPrecisionLightingOffsetWs.xyz;
+		float3 lightResult = 0;
+		float rawLight = 0;
 
-		// for some toolvis shit
-		m.WorldTangentU = i.vTangentUWs;
-		m.WorldTangentV = i.vTangentVWs;
-        m.TextureCoords = i.vTextureCoords.xy;
-		
-		return ShadingModelStandard::Shade( i, m );
+		for ( uint index = 0; index < DynamicLight::Count( i.vPositionSs ); index++ )
+		{
+			Light light = DynamicLight::From( i.vPositionSs, worldPosition, index );
+
+			float NoL = smoothstep(-0.05, 0, dot(light.Direction, normal));
+			float shadowTerm = step(0.4, light.Visibility);
+			float atten = smoothstep(0.19, 0.2, light.Attenuation);
+
+			rawLight += light.Color * NoL * shadowTerm * atten;
+			lightResult += light.Color * max(0.5, NoL * shadowTerm) * atten;
+		}
+
+		// Rim light
+		float3 V = g_vCameraDirWs;
+		float fresnelRes = 1-dot(normal, normalize(V));
+		fresnelRes = (1 - smoothstep(0.49, 0.5, 0.35 * fresnelRes)) * rawLight;
+
+		lightResult += fresnelRes * rimStrength;
+
+		// Sample texture
+		lightResult *= goldColor;
+
+		return float4(lightResult, 1);
 	}
 }
