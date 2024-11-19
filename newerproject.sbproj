@@ -1,14 +1,14 @@
 {
   "Title": "HedgeBox",
   "Type": "game",
-  "Org": "local",
+  "Org": "gator",
   "Ident": "hedgebox",
   "Schema": 1,
   "IncludeSourceFiles": false,
   "Resources": null,
   "PackageReferences": [],
   "EditorReferences": null,
-  "IsWhitelistDisabled": true,
+  "IsWhitelistDisabled": false,
   "Metadata": {
     "MaxPlayers": 64,
     "MinPlayers": 1,

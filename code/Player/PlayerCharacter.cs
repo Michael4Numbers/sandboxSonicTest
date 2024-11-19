@@ -74,7 +74,8 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 	//[Sync]
 	private List<IMovementMode> _movementModes { get; set; }
-	private IMovementMode _activeMovementMode { get; set; }
+	[Sync] private IMovementMode _activeMovementMode { get; set; }
+	[Sync] public IMovementMode movementMode { get => _activeMovementMode; }
 
 	protected override void OnAwake()
 	{
@@ -149,18 +150,20 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	
 	void IScenePhysicsEvents.PrePhysicsStep()
 	{
+		if ( IsProxy ) return;
 		_activeMovementMode.PrePhysics( );
 	}
 
 	public void PostPhysicsStep()
 	{
+		if ( IsProxy ) return;
 		_activeMovementMode.PostPhysics( );
 	}
 
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
-		
+		if ( IsProxy ) return;
 		DebugFixedUpdate(); // Updates various debug values
 	}
 
@@ -230,6 +233,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	
 	protected override void OnUpdate()
 	{
+		if ( IsProxy ) return;
 		levelTimer += Time.Delta;
 		timeSinceLastJump += Time.Delta;
 

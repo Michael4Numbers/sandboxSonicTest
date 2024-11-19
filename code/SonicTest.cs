@@ -1,4 +1,5 @@
 using Sandbox;
+using Sandbox.MovementModes;
 using System.Numerics;
 
 public sealed class SonicTest : Component
@@ -16,6 +17,8 @@ public sealed class SonicTest : Component
 	protected override void OnAwake()
 	{
 		base.OnAwake();
+
+		Log.Info("Use animation graph: " +  Model.UseAnimGraph);
 		Model.OnGenericEvent = ( a ) =>
 		{
 			if ( _player.rigid.Velocity.Length > 50 )
@@ -37,7 +40,8 @@ public sealed class SonicTest : Component
 			.IgnoreGameObjectHierarchy( GameObject )
 			.WithoutTags( "player" )
 			.Run();
-		Model.Set( "isFalling", !_player.IsOnStableGround() );
+		Log.Info( "Player " + Network.Owner.DisplayName + " " + _player.IsOnStableGround() );
+		Model.Set( "isFalling", !(_player.movementMode.GetType() == typeof(GroundMovement)) ); 
 		Model.Set( "RunMultiplier", MapRange( _player.rigid.Velocity.Length, 1250, 3000, 1, 3 ).Clamp(1, 3) );
 
 		/* Disabled because player game object already smoothly slerps their rotation?

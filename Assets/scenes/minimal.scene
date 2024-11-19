@@ -116,56 +116,68 @@
       "__PrefabVariables": {}
     },
     {
-      "__guid": "dcea01e1-c70e-4aef-b260-a108505a00bc",
-      "Flags": 0,
-      "Name": "playercharacter",
-      "Enabled": true,
-      "__Prefab": "prefabs/playercharacter.prefab",
-      "__PrefabVariables": {}
-    },
-    {
       "__guid": "b2644b48-6082-4056-9de0-c2731dd1e8ab",
       "Flags": 0,
       "Name": "GameObject",
-      "Enabled": true
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.NetworkHelper",
+          "__guid": "5abfc3b0-19c4-4acc-8a73-02c54afd76bd",
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/playercharacter.prefab"
+          },
+          "SpawnPoints": [
+            {
+              "_type": "gameobject",
+              "go": "b2644b48-6082-4056-9de0-c2731dd1e8ab"
+            }
+          ],
+          "StartServer": true
+        }
+      ]
     },
     {
       "__guid": "eec91312-672f-4460-b75d-375747823d9b",
       "Flags": 0,
       "Name": "Spring (2)",
-      "Position": "256,448,0",
+      "Position": "256,384,0",
       "Rotation": "0,0.1736482,0,0.9848077",
       "Tags": "targetable",
       "Enabled": true,
       "__Prefab": "prefabs/levelobjects/spring.prefab",
       "__PrefabVariables": {
-        "launch_speed": 4500
+        "launch_speed": 4500,
+        "final_location": "1000,0,0"
       }
     },
     {
       "__guid": "1d5b9749-ad5a-4708-bad2-15201d75edc5",
       "Flags": 0,
       "Name": "Spring (1)",
-      "Position": "256,576,0",
+      "Position": "256,640,0",
       "Rotation": "0,0.3420201,0,0.9396926",
       "Tags": "targetable",
       "Enabled": true,
       "__Prefab": "prefabs/levelobjects/spring.prefab",
       "__PrefabVariables": {
-        "launch_speed": 3700
+        "launch_speed": 3700,
+        "final_location": "1000,0,0"
       }
     },
     {
       "__guid": "9b131051-0fdf-4bcf-8a87-6d08b51884a3",
       "Flags": 0,
       "Name": "Spring",
-      "Position": "256,704,0",
-      "Rotation": "0,0.3826834,0,0.9238796",
+      "Position": "256,896,0",
+      "Rotation": "0,0.258819,0,0.9659259",
       "Tags": "targetable",
       "Enabled": true,
       "__Prefab": "prefabs/levelobjects/spring.prefab",
       "__PrefabVariables": {
-        "launch_speed": 2500
+        "launch_speed": 1720.2893,
+        "final_location": "3277.097,0,1241.657"
       }
     },
     {
