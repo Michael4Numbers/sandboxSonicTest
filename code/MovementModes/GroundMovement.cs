@@ -99,6 +99,11 @@ public class GroundMovement : IMovementMode
 	[Property, Group("New Method")] private float BrakeForce = 600f;
 	[Property, Group("New Method")] private float turnDecceleration = 1200f;
 
+	[Property] private float GroundMaxSpeed { get; set; } = 3000f;
+	[Property] private float GroundAccel { get; set; } = 2048f;
+	[Property] private float GroundBraking { get; set; } = 2500f;
+	[Property, Range( 0, 1 )] private float GroundFriction { get; set; } = 15f;
+
 	[Property, Group("New Method")] private float minTurnSpeed = 400;
 	//[Property, Group("New Method")] private float maxTurnRate = 600;
 
@@ -116,15 +121,17 @@ public class GroundMovement : IMovementMode
 	public override void PrePhysics()
 	{
 		_player.CalculateInputVector();
-		
+
 		// Calculate velocities (directly set it)
 		Vector3 vel = _rb.Velocity;
 		
 		if (_player.IsOnStableGround())
 			CalcVelocity( ref vel );
-		
+
 		// Set velocity accordingly
 		_rb.Velocity = vel;
+
+
 
 		_player.TryStep();
 	}
@@ -154,6 +161,53 @@ public class GroundMovement : IMovementMode
 
 		// Revert step (this is done in S&Boxs PlayerController)
 		//_player.RestoreStep();
+	}
+
+	public Vector3 NewCalculateVelocity( Vector3 velocity, Vector3 moveInput, float deltaTime )
+	{
+		// Apply acceleration & friction to 2D
+		Vector3 accelVector = _player.InputVector * GroundAccel;
+
+		if ( accelVector.IsNearlyZero() )
+		{
+			// Apply braking
+			if ( _player.bSpinDashCharging || _player._timeUntilDashOver <= 0 )
+			{
+				velocity = velocity.Normal * MathF.Max( 0, velocity.Length - GroundBraking * Time.Delta );
+			}
+		}
+		else
+		{
+			// Acceleration & Turning (damping directions not aligned with accelVector
+			float turnAngle = Vector3.GetAngle( velocity.Normal, accelVector.Normal );
+
+			float brakingMultiplier = 1;
+			if ( turnAngle < 160 )
+			{
+				velocity = velocity - (velocity - accelVector.Normal * velocity.Length) * Math.Min( Time.Delta * GroundFriction, 1 );
+			}
+			else
+			{
+				// Double the braking if we're trying to move in reverse
+				velocity = velocity.Normal * MathF.Max( 0, velocity.Length - 2 * GroundBraking * Time.Delta );
+			}
+
+			// Apply input acceleration if less than max speed (guessing 4000 but should prolly make it a parameter on _player so everyone can be consistent)
+			Vector3 accelVel2D = (velocity + accelVector * Time.Delta);//.ClampLength( ogPlanarSpeed );
+
+			// Don't allow input acceleration to take us over the max speed, its ok for input to change directions when we've exceeded max speed tho
+			if ( accelVel2D.Length < GroundMaxSpeed )
+			{
+				velocity = accelVel2D;
+			}
+			else
+			{
+				velocity = accelVel2D.Normal * velocity.Length;
+			}
+
+		}
+
+		return velocity;
 	}
 
 	public override void CalcVelocity(ref Vector3 velocity)
@@ -203,72 +257,6 @@ public class GroundMovement : IMovementMode
 		Rotation targetRot = Rotation.LookAt( targetForward, targetUp );
 		_player.WorldRotation = Rotation.Slerp( _player.WorldRotation, targetRot, 15f * Time.Delta );
 	}
-	
-	public Vector3 NewCalculateVelocity(Vector3 velocity, Vector3 moveInput, float deltaTime)
-	{
-	    float currentSpeed = velocity.Length;
-	    if (currentSpeed < 0.001f)
-	    {
-	        // If starting from standstill, just accelerate in input direction
-	        if (moveInput.Length > 0.001f)
-	        {
-	            return moveInput.Normal * (Acceleration * deltaTime);
-	        }
-	        return Vector3.Zero;
-	    }
-
-	    Vector3 currentDirection = velocity.Normal;
-	    Vector3 inputDirection = moveInput.Normal;
-	    
-	    // Key difference from previous version - using dot product for turns
-	    float turnDot = Vector3.Dot(currentDirection, inputDirection);
-
-	    // No input - decelerate
-	    if (moveInput.Length < 0.001f || _player.bSpinDashCharging || turnDot < -0.96f)
-	    {
-		    float turnFactor = turnDot > -0.96f ? 1 :  (1 - turnDot) * 2f; // bump up braking friction if we're turning around
-		    turnFactor = (_player.bSpinDashCharging && _player.GroundingStatus.HitResult.Normal != -_player.TargetGravDir && currentDirection.Dot( _player.TargetGravDir ) > 0) 
-			    ? 0 : turnFactor; // have some fun slope physics if spin dash charging and velocity isnt opposing gravity
-	        return currentDirection * MathF.Max(0f, currentSpeed - BrakingFriction * turnFactor * deltaTime);
-	    }
-	    
-	    // Sharp turn detection (dot product < 0 means more than 90 degree turn)
-	    if (turnDot < 0.96f) // About 15 degrees
-	    {
-	        // Sharper turns (lower dot product) result in more speed loss
-	        float turnFactor = MathF.Max(0f, 1f - turnDot);  // 0 = same direction, 2 = opposite
-	        float speedLoss = turnDecceleration * turnFactor * deltaTime;
-	        
-	        // Don't reduce speed below minimum turning speed
-	        currentSpeed = MathF.Max( MathF.Min( currentSpeed, minTurnSpeed ), currentSpeed - speedLoss );
-	        
-	        // SA1 does a direct rotation of the velocity here rather than using friction
-	        currentDirection =
-	            currentDirection.RotateTowards(
-	            inputDirection,
-	            (1f - turnDot) * 10f * deltaTime,  // Faster rotation for sharper turns
-	            0f
-	        );
-	    }
-
-	    // Apply acceleration in input direction
-	    Vector3 newVelocity = currentDirection * currentSpeed;
-	    newVelocity += inputDirection * (Acceleration * deltaTime);
-
-	    // Cap at max speed
-	    if (newVelocity.Length > MaxSpeed)
-	    {
-	        // Allow us to go above max speed, but don't apply the acceleration in that case
-	        if (currentSpeed > MaxSpeed)
-	        {
-	            return currentDirection * currentSpeed;
-	        }
-	        return newVelocity.Normal * MaxSpeed;
-	    }
-
-	    return newVelocity;
-	}
-
 
 	void ApplyBraking( ref Vector3 velocity , float brakingMultiplier = 1)
 	{
@@ -294,5 +282,10 @@ public class GroundMovement : IMovementMode
 			Vector3 gravOnPlane = _player.TargetGravDir.PlaneProject( _player.GroundingStatus.HitResult.Normal ) * _player.Gravity.Length;
 			velocity += gravOnPlane * Time.Delta;
 		}
+	}
+
+	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax )
+	{
+		return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 	}
 }

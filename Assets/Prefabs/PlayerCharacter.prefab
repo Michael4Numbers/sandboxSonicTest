@@ -16,7 +16,13 @@
         "UI": {
           "_type": "gameobject",
           "go": "1d773574-08e4-43c9-9310-4cf2f86c8e88"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [
@@ -32,7 +38,18 @@
             "__type": "Sandbox.CapsuleCollider",
             "__guid": "123ababf-59ad-4f24-8ade-64225fc7ccc0",
             "End": "0,0,50",
+            "Friction": null,
             "IsTrigger": false,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "OnObjectTriggerEnter": null,
+            "OnObjectTriggerExit": null,
+            "OnTriggerEnter": null,
+            "OnTriggerExit": null,
             "Radius": 10,
             "Start": "0,0,10",
             "Static": false,
@@ -55,6 +72,12 @@
               "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
               "component_type": "CapsuleCollider"
             },
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "playermodel": {
               "_type": "component",
               "component_id": "f33d0930-a8a2-4052-ae00-a7922d9564f1",
@@ -75,6 +98,9 @@
             "Gravity": true,
             "LinearDamping": 0,
             "Locking": {
+              "X": false,
+              "Y": false,
+              "Z": false,
               "Pitch": true,
               "Yaw": true,
               "Roll": true
@@ -82,6 +108,12 @@
             "MassCenterOverride": "0,0,0",
             "MassOverride": 0,
             "MotionEnabled": true,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "OverrideMassCenter": false,
             "RigidbodyFlags": "DisableCollisionSounds",
             "StartAsleep": false
@@ -94,12 +126,18 @@
             "DistanceAttenuationOverride": false,
             "Falloff": [
               {
+                "x": 0,
                 "y": 1,
                 "in": 3.1415927,
-                "out": -3.1415927
+                "out": -3.1415927,
+                "mode": "Mirrored"
               },
               {
-                "x": 1
+                "x": 1,
+                "y": 0,
+                "in": 0,
+                "out": 0,
+                "mode": "Mirrored"
               }
             ],
             "Force2d": false,
@@ -108,6 +146,12 @@
             "Occlusion": false,
             "OcclusionOverride": false,
             "OcclusionRadius": 32,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "Pitch": 1,
             "PlayOnStart": false,
             "ReflectionOverride": false,
@@ -136,10 +180,19 @@
                 "__guid": "f33d0930-a8a2-4052-ae00-a7922d9564f1",
                 "AnimationGraph": "characters/sonic/animgraphs/sk_sonicrig.vanmgrph",
                 "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": null,
                 "CreateAttachments": false,
                 "CreateBoneObjects": false,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
                 "Model": "characters/sonic/sk_sonicrig.vmdl",
                 "Morphs": {},
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
                 "Parameters": {
                   "bools": {
                     "isFalling": false
@@ -174,6 +227,12 @@
                   "go": "d79c3909-f1ee-4f30-aacb-63fc3788f654",
                   "component_type": "SkinnedModelRenderer"
                 },
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
                 "soundPoint": {
                   "_type": "component",
                   "component_id": "30fd5de7-4c18-4c1e-84c8-f127793f4168",
@@ -195,7 +254,15 @@
                 "__guid": "7766ee37-5871-4820-83ab-b9709574cd29",
                 "BodyGroups": 18446744073709551615,
                 "CreateAttachments": false,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
                 "Model": "characters/sonic/ball/spinball.vmdl",
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
                 "RenderOptions": {
                   "GameLayer": true,
                   "OverlayLayer": false,
@@ -216,14 +283,24 @@
               {
                 "__type": "Sandbox.MovementModes.GroundMovement",
                 "__guid": "c561fc5c-56bf-415b-82c2-6d08c8920cb0",
-                "Acceleration": 1200,
+                "Acceleration": 2200,
                 "BrakeForce": 9000,
                 "MaxSpeed": 2500,
                 "minTurnSpeed": 500,
                 "turnDecceleration": 1200,
                 "BrakingFriction": 1200,
+                "GroundAccel": 1024,
+                "GroundBraking": 2500,
+                "GroundFriction": 5,
+                "GroundMaxSpeed": 3000,
                 "GroundSpeed": 1,
-                "MaxSlopeAngle": 360
+                "MaxSlopeAngle": 360,
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null
               },
               {
                 "__type": "Sandbox.MovementModes.AirMovement",
@@ -231,7 +308,13 @@
                 "__enabled": false,
                 "AirAccel": 3500,
                 "AirBraking": 900,
-                "AirFriction": 10
+                "AirFriction": 10,
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null
               },
               {
                 "__type": "Sandbox.MovementModes.HomingAttackMovement",
@@ -239,7 +322,57 @@
                 "__enabled": false,
                 "HomingAirLaunch": 1200,
                 "HomingForwardLaunch": 2000,
-                "HomingSpeed": 10
+                "HomingSpeed": 10,
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null
+              }
+            ]
+          },
+          {
+            "__guid": "b0a5ec6f-ac70-412c-8563-d26d249e737b",
+            "Flags": 0,
+            "Name": "World",
+            "Position": "0,0,70",
+            "Scale": "2,2,2",
+            "Enabled": true,
+            "NetworkMode": 1,
+            "Components": [
+              {
+                "__type": "Sandbox.WorldPanel",
+                "__guid": "51aa3407-4a8d-4107-98f8-f527a5eedbce",
+                "HorizontalAlign": "Center",
+                "InteractionRange": 1000,
+                "LookAtCamera": true,
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "PanelSize": "1024,256",
+                "RenderOptions": {
+                  "GameLayer": false,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": true
+                },
+                "RenderScale": 1,
+                "VerticalAlign": "Center"
+              },
+              {
+                "__type": "Sandbox.Nametag",
+                "__guid": "77fa73df-2191-4f1d-8142-d7d80a7b22fc",
+                "MyStringValue": "Hello World!",
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null
               }
             ]
           }
@@ -265,6 +398,13 @@
             "Distance": 400,
             "FaceMoveDirectionGracePeriod": 5,
             "LookSensitivity": "25,25",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "Player": null,
             "PositionLerpSpeed": 25
           },
           {
@@ -274,6 +414,12 @@
             "ClearFlags": "All",
             "FieldOfView": 60,
             "IsMainCamera": true,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "Orthographic": false,
             "OrthographicHeight": 1204,
             "Priority": 1,
@@ -301,6 +447,12 @@
                 "__type": "Sandbox.ScreenPanel",
                 "__guid": "0f77f575-e45a-49b9-9dd9-3a7a95032db2",
                 "AutoScreenScale": true,
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
                 "Opacity": 1,
                 "Scale": 1,
                 "ScaleStrategy": "ConsistentHeight",
@@ -314,7 +466,13 @@
                   "component_id": "f78fcd24-97f6-4e4b-a5a7-4a7809c5d1a3",
                   "go": "46e058e8-46c3-4f0e-867d-7c6f1d59351f",
                   "component_type": "PlayerCharacter"
-                }
+                },
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null
               }
             ]
           },
@@ -328,6 +486,12 @@
                 "__type": "Sandbox.ScreenPanel",
                 "__guid": "14267e89-6017-47ff-8688-d4aff5deaf09",
                 "AutoScreenScale": true,
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
                 "Opacity": 1,
                 "Scale": 1,
                 "ScaleStrategy": "ConsistentHeight",
@@ -342,11 +506,23 @@
                   "go": "c3951f4e-572f-4c51-a930-13805f9d468c",
                   "component_type": "PauseMenuFunctionality"
                 },
-                "MyStringValue": "Hello World!"
+                "MyStringValue": "Hello World!",
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null
               },
               {
                 "__type": "PauseMenuFunctionality",
-                "__guid": "2507fd8a-4a47-4347-874a-86ae6358b154"
+                "__guid": "2507fd8a-4a47-4347-874a-86ae6358b154",
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null
               }
             ]
           }
@@ -384,6 +560,5 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
-  "HasUnsavedChanges": false,
   "__version": 1
 }

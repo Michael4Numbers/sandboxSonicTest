@@ -43,7 +43,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -144.0, 16.0 ]
+					m_vecPosition = [ -160.0, 16.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1476714382
@@ -52,7 +52,7 @@
 					m_tagSpans = [  ]
 					m_sequenceName = "A_Beetle_Idle"
 					m_playbackSpeed = 1.0
-					m_bLoop = false
+					m_bLoop = true
 				}
 			},
 		]
