@@ -10,5 +10,5 @@ Layer0
 	rimStrength "2.000"
 
 	//---- Material ----
-	SonicTexture "characters/sonic//textures/t_sonicv2_c.png"
+	SonicTexture "characters/sonic/textures/t_sonicv2_c.png"
 }

@@ -1,6 +1,14 @@
 // Ideally you wouldn't need half these includes for an unlit shader
 // But it's stupiod
 
+MODES
+{
+	Forward();
+	Depth(); 
+	ToolsWireframe( "vr_tools_wireframe.shader" );
+	ToolsShadingComplexity( "tools_shading_complexity.shader" );
+}
+
 FEATURES
 {
     #include "common/features.hlsl"
