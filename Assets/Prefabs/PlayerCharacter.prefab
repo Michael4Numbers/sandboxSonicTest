@@ -404,6 +404,20 @@
                 "OnComponentFixedUpdate": null,
                 "OnComponentStart": null,
                 "OnComponentUpdate": null
+              },
+              {
+                "__type": "Sandbox.MovementModes.RailGrindMovement",
+                "__guid": "4c97e4be-d89b-41f2-a6d7-820030f38a1d",
+                "__enabled": false,
+                "AirAccel": 1,
+                "AirBraking": 1,
+                "AirFriction": 1,
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null
               }
             ]
           }

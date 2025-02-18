@@ -86,7 +86,8 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 	protected override void OnStart()
 	{
 		base.OnStart();
-		
+		lastTracePos = WorldPosition;
+
 		rigid.Gravity = true; // S&Box BUG! rigidbodies with Gravity = false just dont work properly it seems...
 		rigid.PhysicsBody.GravityScale = 0;
 		
@@ -268,6 +269,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 		}
 
 		TrySpinDash();
+		TryGetRail();
 	}
 
 	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax )

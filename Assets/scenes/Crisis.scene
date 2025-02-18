@@ -2,58 +2,6 @@
   "__guid": "457303bf-8458-4973-978e-9e4355495184",
   "GameObjects": [
     {
-      "__guid": "111558b3-e8e4-48ae-abf5-4d801940fb39",
-      "Flags": 0,
-      "Name": "untitled",
-      "Scale": "0.1,0.1,0.1",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "f00ae7d5-c336-4daa-ac69-621ca8f371d4",
-          "BodyGroups": 18446744073709551615,
-          "CreateAttachments": false,
-          "MaterialGroup": null,
-          "MaterialOverride": "models/spoilrig/new material.vmat",
-          "Model": "models/spoilrig/untitled.vmdl",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "RenderOptions": {
-            "GameLayer": true,
-            "OverlayLayer": false,
-            "BloomLayer": false,
-            "AfterUILayer": false
-          },
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Sandbox.ModelCollider",
-          "__guid": "5fcf3058-fd20-4df2-94b9-663995739ad2",
-          "Friction": null,
-          "IsTrigger": false,
-          "Model": "models/spoilrig/untitled.vmdl",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "OnObjectTriggerEnter": null,
-          "OnObjectTriggerExit": null,
-          "OnTriggerEnter": null,
-          "OnTriggerExit": null,
-          "Static": true,
-          "Surface": null,
-          "SurfaceVelocity": "0,0,0"
-        }
-      ]
-    },
-    {
       "__guid": "98a7e778-9603-4206-97a5-acd59b1c10ae",
       "Flags": 0,
       "Name": "Sun",
@@ -132,7 +80,7 @@
       "__guid": "32f4e06d-4fdc-48e3-9798-70fec1e17bb3",
       "Flags": 0,
       "Name": "playercharacter",
-      "Position": "-3589.55,-2877.323,32",
+      "Position": "-1187.904,-240.5376,32",
       "Rotation": "0,0,0.7071067,0.7071068",
       "Enabled": true,
       "__Prefab": "prefabs/playercharacter.prefab",
@@ -217,6 +165,190 @@
           "Static": false,
           "Surface": null,
           "SurfaceVelocity": "0,0,0"
+        }
+      ]
+    },
+    {
+      "__guid": "32800b4a-b653-4b46-a571-7230763d1c74",
+      "Flags": 0,
+      "Name": "Object",
+      "Rotation": "0,0,-1,0.0000001947072",
+      "Tags": "rail",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SplineComponent",
+          "__guid": "6b72b413-caa8-499a-b9ab-4debb1851c6f",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Spline": {
+            "Points": [
+              {
+                "Pos": "0,0,0",
+                "In": "-16.66667,-105.4666,-119.4174",
+                "Out": "16.66667,105.4666,119.4174"
+              },
+              {
+                "Pos": "100,632.7993,716.5043",
+                "In": "-16.66667,-290.4745,5.954742",
+                "Out": "16.66667,290.4745,-5.954742"
+              },
+              {
+                "Pos": "100,1742.847,-35.72844",
+                "In": "-0,-185.0079,125.3721",
+                "Out": "0,185.0079,-125.3721"
+              }
+            ]
+          }
+        },
+        {
+          "__type": "Sandbox.SplineModelRenderer",
+          "__guid": "bf941250-7d38-4dca-9e61-fafcbbe7889a",
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "FlexFit": true,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/railcollider.vmdl",
+          "ModelOffset": "0,0,0",
+          "ModelRotation": "0,0,0,1",
+          "ModelScale": "15,1,1",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Spacing": 0,
+          "Spline": {
+            "_type": "component",
+            "component_id": "6b72b413-caa8-499a-b9ab-4debb1851c6f",
+            "go": "32800b4a-b653-4b46-a571-7230763d1c74",
+            "component_type": "SplineComponent"
+          },
+          "Tint": "1,1,1,1",
+          "UseRotationMinimizingFrames": true
+        },
+        {
+          "__type": "Sandbox.SplineCollider",
+          "__guid": "3bb0d50b-a57d-45fc-9c5b-774a3c0f4c55",
+          "FlexFit": false,
+          "Friction": null,
+          "IsTrigger": true,
+          "Model": "models/railcollider.vmdl",
+          "ModelOffset": "0,0,0",
+          "ModelRotation": "0,0,0,1",
+          "ModelScale": "15,1,1",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "OnObjectTriggerEnter": null,
+          "OnObjectTriggerExit": null,
+          "OnTriggerEnter": null,
+          "OnTriggerExit": null,
+          "Spacing": 0,
+          "Spline": {
+            "_type": "component",
+            "component_id": "6b72b413-caa8-499a-b9ab-4debb1851c6f",
+            "go": "32800b4a-b653-4b46-a571-7230763d1c74",
+            "component_type": "SplineComponent"
+          },
+          "Static": false,
+          "Subdivision": 0,
+          "Surface": null,
+          "SurfaceVelocity": "0,0,0",
+          "UseRotationMinimizingFrames": false
+        },
+        {
+          "__type": "RailGrind",
+          "__guid": "dde47d47-c495-416d-9573-9a582e48e032",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ]
+    },
+    {
+      "__guid": "1921cda5-d131-4be0-9d49-7a7098948baf",
+      "Flags": 0,
+      "Name": "Cube",
+      "Position": "-1417.364,-1910.806,1025.104",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "f8d3965b-c35f-4666-993e-2bd8c1edced6",
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/dev/box.vmdl",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "cdf51936-5324-4891-8c6c-1fd821cb8c21",
+          "Flags": 0,
+          "Name": "Cube (1)",
+          "Position": "0,0.0002441406,48.86145",
+          "Scale": "0.2654468,0.2776659,1",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "a4d8d360-cc04-4aa6-83f4-eb8d5fa03a61",
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/dev/box.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
         }
       ]
     }
