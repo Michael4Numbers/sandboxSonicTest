@@ -13,7 +13,8 @@
       "EditorReferences": [],
       "IsWhitelistDisabled": false,
       "Metadata": {
-        "SingleAssetSource": "maps/level_testlevel.vmap"
+        "SingleAssetSource": "maps/level_testlevel.vmap",
+        "ParentPackage": "gator.hedgebox"
       }
     }
   }

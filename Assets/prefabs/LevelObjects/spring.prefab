@@ -10,16 +10,34 @@
         "__type": "Sandbox.SphereCollider",
         "__guid": "19ce021e-7127-4531-9889-a985fc460b65",
         "Center": "0,0,16",
+        "Friction": null,
         "IsTrigger": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnObjectTriggerEnter": null,
+        "OnObjectTriggerExit": null,
+        "OnTriggerEnter": null,
+        "OnTriggerExit": null,
         "Radius": 48,
         "Static": false,
+        "Surface": null,
         "SurfaceVelocity": "0,0,0"
       },
       {
         "__type": "Spring",
         "__guid": "a13a43eb-153e-4318-b939-7303f335b999",
         "finalLocation": "1000,0,0",
-        "LaunchSpeed": 2500
+        "LaunchSpeed": 2500,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [
@@ -34,7 +52,15 @@
             "__guid": "fa343688-66f1-4721-9624-2448169e6fdf",
             "BodyGroups": 18446744073709551615,
             "CreateAttachments": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
             "Model": "models/levelobjects/spring/sk_spring.vmdl",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "RenderOptions": {
               "GameLayer": true,
               "OverlayLayer": false,
@@ -51,6 +77,9 @@
       {
         "Id": "launch_speed",
         "Title": "launch_speed",
+        "Description": null,
+        "Group": null,
+        "Order": 0,
         "Targets": [
           {
             "Id": "a13a43eb-153e-4318-b939-7303f335b999",
@@ -61,6 +90,9 @@
       {
         "Id": "final_location",
         "Title": "final_location",
+        "Description": null,
+        "Group": null,
+        "Order": 0,
         "Targets": [
           {
             "Id": "a13a43eb-153e-4318-b939-7303f335b999",
@@ -99,6 +131,5 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
-  "HasUnsavedChanges": false,
   "__version": 1
 }

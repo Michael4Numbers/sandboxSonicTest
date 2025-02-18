@@ -1,0 +1,18 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/celshading_panner.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	g_vPanSpeed "[0.000 -2.000]"
+	rimStrength "0.000"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	SonicTexture "models/levelobjects/dashpanel/textures/t_dashpanel_panel.png"
+}

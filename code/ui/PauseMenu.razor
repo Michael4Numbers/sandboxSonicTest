@@ -9,8 +9,11 @@
 		<div class="button" onclick=@OnResume>
 			Resume
 		</div>
+		<div class="button" onclick=@OnRestart>
+			Restart
+		</div>
 		<div class="button" onclick=@OnQuit>
-			Quit (Alt+F4)
+			Quit
 		</div>
 	</div>
 </root>
@@ -37,10 +40,15 @@
 	}
 
 	void OnQuit(){
-		functionality.QuitGame();
+		Game.Close();
+	}
+
+	void OnRestart(){
+		Game.ActiveScene.Load(SceneToLoad);
 	}
 
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello Worlds!";
+	[Property] SceneFile SceneToLoad { get; set; }
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt

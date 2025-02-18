@@ -22,8 +22,7 @@ public sealed class Spring : Component, Component.ITriggerListener, Component.Ex
 			player.GetMovementMode<AirMovement>()._timeUntilSpringTrajectoryOver = tf;
 			
 			player.ClearAirDash();
-			player.ball.Enabled = false;
-			player.playermodel.Tint = Color.White;
+			player.SetBallMode( 0 );
 			Sound.Play( "levelobject_spring", WorldPosition );
 			player.SetMovementMode<AirMovement>();
 		} 

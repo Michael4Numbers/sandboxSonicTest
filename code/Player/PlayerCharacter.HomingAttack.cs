@@ -66,17 +66,16 @@ public sealed partial class PlayerCharacter
         Sound.Play( "player_airdash", WorldPosition );
 		rigid.Velocity = (WorldRotation.Forward * 3000f).WithZ(0);
 		airDashed = true;
-		ball.Enabled = true;
-		playermodel.Tint = Color.Transparent;
-    }
+		SetBallMode( 1 );
+	}
 
     void HomingAttack(GameObject target){
         Sound.Play( "player_airdash", WorldPosition );
 		homingTarget = target;
 		airDashed = true;
-		ball.Enabled = true;
-		playermodel.Tint = Color.Transparent;
+		SetBallMode( 1 );
 		SetMovementMode<HomingAttackMovement>();
+		IHomingAttackTarget.PostToGameObject( homingTarget, x => x.HomingAttackInit( this, WorldPosition, homingTarget.WorldPosition ) );
     }
 
 	public void ClearAirDash()

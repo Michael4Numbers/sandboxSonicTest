@@ -24,6 +24,7 @@ public sealed class CameraMovement : Component, IScenePhysicsEvents
 
 	[Property, Category("Camera Info")] public float Distance { get; set; } = 200f;
 	[Property, Category("Camera Info")] public Vector2 LookSensitivity { get; set; } = 10f;
+	[Property, Category( "Camera Info" )] public Vector2 LookSensitivityController { get; set; } = 65f;
 	[Property, Category("Camera Info")] public float PositionLerpSpeed { get; set; } = 25f;
 	[Property, Category("Camera Info")] public float FaceMoveDirectionGracePeriod { get; set; } = 5f;
 
@@ -74,8 +75,8 @@ public sealed class CameraMovement : Component, IScenePhysicsEvents
 		}
 		else
 		{
-			_inputDelta.pitch = Input.AnalogLook.pitch * LookSensitivity.y * Time.Delta;
-			_inputDelta.yaw = Input.AnalogLook.yaw * LookSensitivity.x * Time.Delta;
+			_inputDelta.pitch = Input.AnalogLook.pitch * LookSensitivityController.y * Time.Delta;
+			_inputDelta.yaw = Input.AnalogLook.yaw * LookSensitivityController.x * Time.Delta;
 		}
 
 		if (!_inputDelta.IsNearlyZero(  )) _sinceLastInput = 0;
@@ -118,6 +119,13 @@ public sealed class CameraMovement : Component, IScenePhysicsEvents
 
 		Rotation RotDelta = Rotation.FromToRotation(From, To);
 		_camRot.yaw += RotDelta.Angles().yaw * OrbitFactor;  
+	}
+
+	public void TeleportCam(Vector3 oldPos, Vector3 newPos)
+	{
+		var posDif = oldPos - newPos;
+		_prevCameraPivot += posDif;
+		_cameraPivot += posDif;
 	}
 	
 	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax )

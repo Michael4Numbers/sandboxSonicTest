@@ -115,7 +115,10 @@ public class GroundMovement : IMovementMode
 	protected override void OnEnabled()
 	{
 		base.OnEnabled();
-		_rb.Velocity = Vector3.VectorPlaneProject( _rb.Velocity, _player.GroundingStatus.HitResult.Normal );
+		if( _rb != null )
+		{
+			_rb.Velocity = Vector3.VectorPlaneProject( _rb.Velocity, _player.GroundingStatus.HitResult.Normal );
+		}
 	}
 
 	public override void PrePhysics()
@@ -179,10 +182,10 @@ public class GroundMovement : IMovementMode
 		else
 		{
 			// Acceleration & Turning (damping directions not aligned with accelVector
-			float turnAngle = Vector3.GetAngle( velocity.Normal, accelVector.Normal );
+			float turnAngle = Vector3.GetAngle( velocity.Normal, _player.InputVector );
 
 			float brakingMultiplier = 1;
-			if ( turnAngle < 160 )
+			if ( turnAngle < 115 )
 			{
 				velocity = velocity - (velocity - accelVector.Normal * velocity.Length) * Math.Min( Time.Delta * GroundFriction, 1 );
 			}
@@ -214,14 +217,15 @@ public class GroundMovement : IMovementMode
 	{
 		Vector3 targetVel = _player.bSpinDashCharging ? 0 : _player.InputVector; // zero input vector if charging a spindash
 
-		velocity = NewCalculateVelocity( velocity, targetVel, Time.Delta );
+		/*velocity = NewCalculateVelocity( velocity, targetVel, Time.Delta );
 		ApplySlopePhysics( ref velocity );
-		return;
+		return;*/
 
 		var newSpeed = (velocity.Length + (GroundSpeed * 20 * PlayerCharacter.MapRange( velocity.Length, 0, 4000, 1, 0 )));
 
 		// Limiting turn rate during the spindash grace period
-		float turnRate = _player._timeUntilDashOver > 0 ? .05f : 0.2f;
+		float turnRateWalk = MapRange(velocity.Length, 0, 3000, 0.2f, 0.1f );
+		float turnRate = _player._timeUntilDashOver > 0 ? .05f : turnRateWalk;
 
 		float inputAngle = velocity.IsNearlyZero(  ) ? 0 : Vector3.GetAngle( _player.InputVector, velocity.Normal );
 		
@@ -279,13 +283,17 @@ public class GroundMovement : IMovementMode
 		else
 		{
 			// Apply gravity directly if we're not moving so we slide down slopes if standing still [optional]
-			Vector3 gravOnPlane = _player.TargetGravDir.PlaneProject( _player.GroundingStatus.HitResult.Normal ) * _player.Gravity.Length;
-			velocity += gravOnPlane * Time.Delta;
+			//Vector3 gravOnPlane = _player.TargetGravDir.PlaneProject( _player.GroundingStatus.HitResult.Normal ) * _player.Gravity.Length;
+			//velocity += gravOnPlane * Time.Delta;
 		}
 	}
 
-	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax )
+	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax, bool clamp = true )
 	{
+		if ( clamp )
+		{
+			return MathX.Clamp( ((value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin), outMin, outMax );
+		}
 		return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 	}
 }

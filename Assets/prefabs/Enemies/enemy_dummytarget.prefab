@@ -2,8 +2,7 @@
   "RootObject": {
     "__guid": "71cb8786-c8d7-4b32-baf6-d231453309c3",
     "Flags": 0,
-    "Name": "DummyTarget",
-    "Position": "0,256,128",
+    "Name": "enemy_dummytarget",
     "Tags": "targetable",
     "Enabled": true,
     "Components": [
@@ -11,11 +10,37 @@
         "__type": "Sandbox.CapsuleCollider",
         "__guid": "26c51f3c-199a-4ff8-bd4e-060a313293f2",
         "End": "0,0,0",
+        "Friction": null,
         "IsTrigger": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnObjectTriggerEnter": null,
+        "OnObjectTriggerExit": null,
+        "OnTriggerEnter": null,
+        "OnTriggerExit": null,
         "Radius": 24,
         "Start": "0,0,0",
         "Static": false,
+        "Surface": null,
         "SurfaceVelocity": "0,0,0"
+      },
+      {
+        "__type": "EnemyBeetle",
+        "__guid": "6034dc0a-1c80-424d-9bcb-8860ed89a8aa",
+        "destroyedObject": {
+          "_type": "gameobject",
+          "prefab": "prefabs/enemies/enemy_dummytarget_destroyed.prefab"
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [
@@ -32,10 +57,19 @@
             "__guid": "7cce6baf-6a17-401a-8f14-9268f5ea9930",
             "AnimationGraph": "characters/enemies/beetle/animgraphs/ag_beetle.vanmgrph",
             "BodyGroups": 18446744073709551615,
+            "BoneMergeTarget": null,
             "CreateAttachments": false,
             "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
             "Model": "characters/enemies/beetle/sk_beetle.vmdl",
             "Morphs": {},
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "Parameters": {
               "bools": {},
               "ints": {},
@@ -43,6 +77,7 @@
               "vectors": {},
               "rotations": {}
             },
+            "PlaybackRate": 1,
             "RenderOptions": {
               "GameLayer": true,
               "OverlayLayer": false,
@@ -64,7 +99,31 @@
         "Name": "HomingPosition",
         "Enabled": true
       }
-    ]
+    ],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
@@ -72,6 +131,5 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
-  "HasUnsavedChanges": false,
   "__version": 1
 }

@@ -23,6 +23,17 @@
 				[
 					{
 						_class = "RenderMeshFile"
+						children = 
+						[
+							{
+								_class = "RenderMeshMarkup"
+								material_search_path = ""
+								use_expensive_tangents = true
+								high_high_precision_texcoords = true
+								calc_per_vertex_curvature = true
+								prefer_high_density_tris_in_uv_density_calc = false
+							},
+						]
 						filename = "characters/sonic/sk_sonicrig.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -280,6 +291,22 @@
 					{
 						_class = "AnimFile"
 						name = "A_SonicV2_Land"
+						children = 
+						[
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 4
+								event_keys = 
+								{
+									Volume = 1.0
+									name = "sounds/player/land.sound"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+						]
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -339,6 +366,98 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "a_sonicv2_activatewristpower"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
+						source_filename = "characters/sonic/animations/a_sonicv2_activatewristpower.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "A_SonicV2_IdleBind"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
+						source_filename = "characters/sonic/animations/A_SonicV2_IdleBind.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_sonicv2_fallinbetween"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
+						source_filename = "characters/sonic/animations/a_sonicv2_fallinbetween.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_sonicv2_landhighspeed"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
+						source_filename = "characters/sonic/animations/a_sonicv2_landhighspeed.fbx"
+						start_frame = -1
+						end_frame = 9
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -357,8 +476,40 @@
 					},
 				]
 			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "RightArmActivate"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "Hips"
+								weight = 0.0
+							},
+							{
+								bone = "Left_Arm"
+								weight = 0.434615
+							},
+							{
+								bone = "Left_Shoulder"
+								weight = 0.423077
+							},
+							{
+								bone = "Spine"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = 1.0
+						morph_weights = [  ]
+					},
+				]
+			},
 		]
-		model_archetype = ""
+		model_archetype = "default"
 		primary_associated_entity = ""
 		anim_graph_name = "animgraphs/sk_sonicrig.vanmgrph"
 		base_model_name = ""

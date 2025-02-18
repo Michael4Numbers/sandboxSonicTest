@@ -20,7 +20,7 @@ public sealed class SonicTest : Component
 
 		Model.OnGenericEvent = ( a ) =>
 		{
-			if ( _player.rigid.Velocity.Length > 50 )
+			if ( _player.rigid.Velocity.Length > 50 && Model.Tint == "#FFFFFF" )
 			{
 				//PlayerController.PlayFootstepSound( WorldPosition, 1.0f, 1 );
 				Sound.Play( "footstep-concrete", WorldPosition );
@@ -42,6 +42,7 @@ public sealed class SonicTest : Component
 		Model.Set( "isFalling", !(_player.movementMode.GetType() == typeof(GroundMovement)) ); 
 		Model.Set( "RunMultiplier", MapRange( _player.rigid.Velocity.Length, 50, 3000, 1f, 3 ).Clamp( 0.75f, 3) );
 
+		_player.groundBall.PlaybackRate = MapRange( _player._timeSinceDashing, 0, 2, 1, 4 );
 		/* Disabled because player game object already smoothly slerps their rotation?
 		if( trace.Hit )
 		{
@@ -80,8 +81,12 @@ public sealed class SonicTest : Component
 
 	}
 
-	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax )
+	public static float MapRange( float value, float inMin, float inMax, float outMin, float outMax, bool clamp = true )
 	{
+		if ( clamp )
+		{
+			return MathX.Clamp( ((value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin), outMin, outMax );
+		}
 		return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 	}
 

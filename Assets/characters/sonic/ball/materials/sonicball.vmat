@@ -2,11 +2,11 @@
 
 Layer0
 {
-	shader "shaders/spinner.shader"
+	shader "shaders/celshading_spinner.shader"
 
 	g_flSpeed "20.000"
-	Texture "characters/sonic/ball/textures/sonicball.png"
+	rimStrength "1.000"
 
-	//---- Fog ----
-	g_bFogEnabled "1"
+	//---- Material ----
+	SonicTexture "characters/sonic/ball/textures/sonicball.png"
 }

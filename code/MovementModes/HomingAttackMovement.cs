@@ -38,9 +38,9 @@ public class HomingAttackMovement : IMovementMode
 			Vector3 launchDirection = Vector3.Direction( homingStart, homingEnd );
 			_player.rigid.Velocity = (launchDirection.WithZ( 0f ).Normal * HomingForwardLaunch) + (-_player.GravityDir * HomingAirLaunch);
 			_player.ClearAirDash();
+			IHomingAttackTarget.PostToGameObject( _player.homingTarget, x => x.HomingAttackHit( _player, homingStart, homingEnd ) );
 			_player.homingTarget = null;
-			_player.ball.Enabled = false;
-			_player.playermodel.Tint = Color.White;
+			_player.SetBallMode( 0 );
 			_player.playermodel.Set( "homingAttack", true );
 			_player.SetMovementMode<AirMovement>();
 			_player.WorldPosition = homingEnd;
