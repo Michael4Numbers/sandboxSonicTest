@@ -26,7 +26,8 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 #region GRAVITY PARAMS
 	
 	[Property] public float GravityScale = 3;
-	
+	[Property] public float JumpForce = 1500;
+
 	[Sync]
 	public Vector3 GravityDir
 	{
@@ -248,12 +249,22 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 
 		if ( Input.Pressed( "Jump" ) && IsOnStableGround() )
 		{
-			rigid.Velocity -= GravityDir * 1500; // jumps away from the floor
+			rigid.Velocity -= GravityDir * JumpForce; // jumps away from the floor
 			Sound.Play( "player_jump", WorldPosition );
 			Sound.Play( "player_jumproll", WorldPosition );
 			SetBallMode( 1 );
 			timeSinceLastJump = 0;
 			jumped = true;
+			UnGround();
+		}
+		else if ( Input.Pressed( "Jump" ) && _activeMovementMode.GetType() == typeof( RailGrindMovement ) )
+		{
+			Sound.Play( "player_jump", WorldPosition );
+			Sound.Play( "player_jumproll", WorldPosition );
+			GetMovementMode<RailGrindMovement>().EndGrind(true);
+			timeSinceLastJump = 0;
+			jumped = true;
+			SetMovementMode<AirMovement>();
 			UnGround();
 		}
 		else if ( IsOnStableGround() && timeSinceLastJump > 0.2f )
@@ -263,7 +274,7 @@ public sealed partial class PlayerCharacter : Component, IScenePhysicsEvents
 			airDashed = false;
 		}
 
-		if ( Input.Pressed( "attack1" ) && !IsOnStableGround() && !airDashed )
+		if ( Input.Pressed( "attack1" ) && _activeMovementMode.GetType() == typeof(AirMovement) && !airDashed )
 		{
 			AttemptHomingAttack();
 		}

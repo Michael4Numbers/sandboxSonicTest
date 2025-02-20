@@ -13,6 +13,10 @@ public sealed class SonicTest : Component
 	[Property]
 	public SoundPointComponent soundPoint { get; set; }
 
+	public Rotation lastRotation;
+	public Rotation deltaRotation;
+	public float yawRotSpeed;
+
 
 	protected override void OnAwake()
 	{
@@ -32,8 +36,14 @@ public sealed class SonicTest : Component
 
 	protected override void OnUpdate()
 	{
+		deltaRotation = Rotation.Difference(lastRotation, WorldRotation);
+		lastRotation = WorldRotation;
+
+		yawRotSpeed = deltaRotation.Yaw() / Time.Delta * 0.4f;
+
 		Model.Set( "move_speed", _player.rigid.Velocity.Length );
 		Model.Set( "fall_speed", _player.rigid.Velocity.z );
+		Model.Set( "yawRotation", yawRotSpeed );
 		var trace = Scene.Trace.Ray( GameObject.WorldPosition + (GameObject.WorldRotation.Up * 10.0f), GameObject.WorldPosition + (GameObject.WorldRotation.Down * 10.0f) )
 			.Size( 5f )
 			.IgnoreGameObjectHierarchy( GameObject )
@@ -41,6 +51,9 @@ public sealed class SonicTest : Component
 			.Run();
 		Model.Set( "isFalling", !(_player.movementMode.GetType() == typeof(GroundMovement)) ); 
 		Model.Set( "RunMultiplier", MapRange( _player.rigid.Velocity.Length, 50, 3000, 1f, 3 ).Clamp( 0.75f, 3) );
+		var movementType = _player.movementMode.GetType();
+		int movementMode = movementType == typeof(GroundMovement) || movementType == typeof(AirMovement) || movementType == typeof( HomingAttackMovement ) ? 0 : 1 ;
+		Model.Set( "MovementMode", movementMode );
 
 		_player.groundBall.PlaybackRate = MapRange( _player._timeSinceDashing, 0, 2, 1, 4 );
 		/* Disabled because player game object already smoothly slerps their rotation?

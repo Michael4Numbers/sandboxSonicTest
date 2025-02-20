@@ -168,35 +168,6 @@
       "__PrefabVariables": {}
     },
     {
-      "__guid": "b2644b48-6082-4056-9de0-c2731dd1e8ab",
-      "Flags": 0,
-      "Name": "GameObject",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.NetworkHelper",
-          "__guid": "5abfc3b0-19c4-4acc-8a73-02c54afd76bd",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "PlayerPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/playercharacter.prefab"
-          },
-          "SpawnPoints": [
-            {
-              "_type": "gameobject",
-              "go": "b2644b48-6082-4056-9de0-c2731dd1e8ab"
-            }
-          ],
-          "StartServer": true
-        }
-      ]
-    },
-    {
       "__guid": "68628178-e9c2-44b0-adb0-db26cad1c3a0",
       "Flags": 0,
       "Name": "Spring (3)",
@@ -968,6 +939,312 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "a8bdf141-88ef-45d8-b39e-b2716092110d",
+      "Flags": 0,
+      "Name": "Rail",
+      "Position": "-785.577,758.7715,160",
+      "Rotation": "0,0,-1,0.0000001947072",
+      "Tags": "rail",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SplineComponent",
+          "__guid": "4f8806dc-0dfa-489f-946f-e4d8164b79fa",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Spline": {
+            "Points": [
+              {
+                "Pos": "0,0,0",
+                "In": "-16.66667,-105.4666,-119.4174",
+                "Out": "16.66667,105.4666,119.4174"
+              },
+              {
+                "Pos": "100,632.7993,716.5043",
+                "In": "-16.66666,-282.0984,5.954742",
+                "Out": "16.66666,282.0984,-5.954742"
+              },
+              {
+                "Pos": "99.99998,1692.59,-35.72844",
+                "In": "79.97737,-293.3864,103.5222",
+                "Out": "-79.97737,293.3864,-103.5222"
+              },
+              {
+                "Pos": "-379.8642,2393.117,95.37089",
+                "In": "243.4476,-116.7545,-21.84989",
+                "Out": "-243.4476,116.7545,21.84989"
+              },
+              {
+                "Pos": "-1360.686,2393.117,95.37089",
+                "In": "163.4703,133.8332,-0",
+                "Out": "-163.4703,-133.8332,0"
+              },
+              {
+                "Pos": "-1360.686,1590.118,95.37089",
+                "In": "-0,269.7667,-109.602",
+                "Out": "0,-269.7667,109.602"
+              },
+              {
+                "Pos": "-1360.686,774.5175,752.9828",
+                "In": "-0,349.7964,-9.67272",
+                "Out": "0,-349.7964,9.67272"
+              },
+              {
+                "Pos": "-1360.686,-508.6602,153.4072",
+                "In": "0.00004069011,382.6897,103.7956",
+                "Out": "-0.00004069011,-382.6897,-103.7956"
+              },
+              {
+                "Pos": "-1360.686,-1521.62,130.209",
+                "In": "0.00004069011,168.8267,3.866374",
+                "Out": "-0.00004069011,-168.8267,-3.866374"
+              }
+            ]
+          }
+        },
+        {
+          "__type": "Sandbox.SplineModelRenderer",
+          "__guid": "865a58d9-7241-47cb-a167-cc0b031215bd",
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "FlexFit": true,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/railcollider.vmdl",
+          "ModelOffset": "0,0,0",
+          "ModelRotation": "0,0,0,1",
+          "ModelScale": "15,1,1",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Spacing": 0,
+          "Spline": {
+            "_type": "component",
+            "component_id": "4f8806dc-0dfa-489f-946f-e4d8164b79fa",
+            "go": "a8bdf141-88ef-45d8-b39e-b2716092110d",
+            "component_type": "SplineComponent"
+          },
+          "Tint": "1,1,1,1",
+          "UseRotationMinimizingFrames": true
+        },
+        {
+          "__type": "Sandbox.SplineCollider",
+          "__guid": "091dc5a7-0e70-49a6-8103-a0474ed72469",
+          "FlexFit": true,
+          "Friction": null,
+          "IsTrigger": true,
+          "Model": "models/railcollider.vmdl",
+          "ModelOffset": "0,0,0",
+          "ModelRotation": "0,0,0,1",
+          "ModelScale": "15,0.2,0.2",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "OnObjectTriggerEnter": null,
+          "OnObjectTriggerExit": null,
+          "OnTriggerEnter": null,
+          "OnTriggerExit": null,
+          "Spacing": 0,
+          "Spline": {
+            "_type": "component",
+            "component_id": "4f8806dc-0dfa-489f-946f-e4d8164b79fa",
+            "go": "a8bdf141-88ef-45d8-b39e-b2716092110d",
+            "component_type": "SplineComponent"
+          },
+          "Static": false,
+          "Subdivision": 0,
+          "Surface": null,
+          "SurfaceVelocity": "0,0,0",
+          "UseRotationMinimizingFrames": true
+        },
+        {
+          "__type": "RailGrind",
+          "__guid": "472d644d-d9ef-48be-9bbb-33ca3f894475",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ]
+    },
+    {
+      "__guid": "bb6b674b-d2e8-4187-acc4-bea98a6ba739",
+      "Flags": 0,
+      "Name": "Rail (1)",
+      "Position": "1090.952,1030.298,483.9554",
+      "Rotation": "-0.00000007451121,-0.3826834,-0.9238796,0.000000179886",
+      "Tags": "rail",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SplineComponent",
+          "__guid": "c161cb76-c8f7-431d-8753-9d4c2e1eb244",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Spline": {
+            "Points": [
+              {
+                "Pos": "0,0,0",
+                "In": "-16.66667,-105.4666,7.472875",
+                "Out": "16.66667,105.4666,-7.472875"
+              },
+              {
+                "Pos": "100,632.7993,-44.83725",
+                "In": "25.9698,-115.06,5.95474",
+                "Out": "-25.9698,115.06,-5.95474"
+              },
+              {
+                "Pos": "-155.8188,690.3601,-35.72844",
+                "In": "76.33546,69.42636,-23.36803",
+                "Out": "-76.33546,-69.42636,23.36803"
+              },
+              {
+                "Pos": "-358.0128,216.2411,95.37091",
+                "In": "70.375,60.12915,-21.84987",
+                "Out": "-70.375,-60.12915,21.84987"
+              },
+              {
+                "Pos": "-578.0688,329.5852,95.37077",
+                "In": "10.61208,-103.4616,0.00002288818",
+                "Out": "-10.61208,103.4616,-0.00002288818"
+              },
+              {
+                "Pos": "-421.6853,837.011,95.37077",
+                "In": "-31.14149,-55.79171,-109.602",
+                "Out": "31.14149,55.79171,109.602"
+              },
+              {
+                "Pos": "-391.2198,664.3354,752.9826",
+                "In": "50.76185,79.29766,-9.672729",
+                "Out": "-50.76185,-79.29766,9.672729"
+              },
+              {
+                "Pos": "-726.2563,361.225,153.4072",
+                "In": "10.89614,198.4527,103.7956",
+                "Out": "-10.89614,-198.4527,-103.7956"
+              },
+              {
+                "Pos": "-456.5966,-526.3805,130.2091",
+                "In": "-44.94328,147.9343,3.866356",
+                "Out": "44.94328,-147.9343,-3.866356"
+              }
+            ]
+          }
+        },
+        {
+          "__type": "Sandbox.SplineModelRenderer",
+          "__guid": "acb2af0e-33e5-4582-ade4-b5b59410fddc",
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "FlexFit": true,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/railcollider.vmdl",
+          "ModelOffset": "0,0,0",
+          "ModelRotation": "0,0,0,1",
+          "ModelScale": "15,1,1",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Spacing": 0,
+          "Spline": {
+            "_type": "component",
+            "component_id": "c161cb76-c8f7-431d-8753-9d4c2e1eb244",
+            "go": "bb6b674b-d2e8-4187-acc4-bea98a6ba739",
+            "component_type": "SplineComponent"
+          },
+          "Tint": "1,1,1,1",
+          "UseRotationMinimizingFrames": true
+        },
+        {
+          "__type": "Sandbox.SplineCollider",
+          "__guid": "580bb4a9-42ec-4ed0-82e1-60cc56dde1d0",
+          "FlexFit": true,
+          "Friction": null,
+          "IsTrigger": true,
+          "Model": "models/railcollider.vmdl",
+          "ModelOffset": "0,0,0",
+          "ModelRotation": "0,0,0,1",
+          "ModelScale": "15,0.2,0.2",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "OnObjectTriggerEnter": null,
+          "OnObjectTriggerExit": null,
+          "OnTriggerEnter": null,
+          "OnTriggerExit": null,
+          "Spacing": 0,
+          "Spline": {
+            "_type": "component",
+            "component_id": "c161cb76-c8f7-431d-8753-9d4c2e1eb244",
+            "go": "bb6b674b-d2e8-4187-acc4-bea98a6ba739",
+            "component_type": "SplineComponent"
+          },
+          "Static": false,
+          "Subdivision": 0,
+          "Surface": null,
+          "SurfaceVelocity": "0,0,0",
+          "UseRotationMinimizingFrames": true
+        },
+        {
+          "__type": "RailGrind",
+          "__guid": "b2d10614-e723-44c5-b2a8-94af9118f7cf",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ]
+    },
+    {
+      "__guid": "8dea43ba-dc1b-4d81-b122-fbe7723bc8e5",
+      "Flags": 0,
+      "Name": "playercharacter",
+      "Position": "-493.065,356.0433,-0.0002695322",
+      "Enabled": true,
+      "NetworkMode": 0,
+      "__Prefab": "prefabs/playercharacter.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {

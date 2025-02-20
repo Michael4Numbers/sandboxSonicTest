@@ -15,26 +15,13 @@ public sealed class RailGrind : Component
 
 	}
 
-	public Transform GetTransformAtDistance( float distance )
+	public Transform GetTransformAtDistance( float distance, float speed )
 	{
 		var pointInfo = spline.SampleAtDistance( distance );
-		Vector3 localPos = pointInfo.Position;
-		Rotation localRot = Rotation.LookAt( pointInfo.Tangent, pointInfo.Up );
-		Transform localTransform = new Transform( localPos, localRot );
 
-		// Construct the world transformation matrix manually
-		Matrix translationMatrix = Matrix.CreateTranslation( WorldPosition );
-		Matrix rotationMatrix = Matrix.CreateRotation( WorldRotation );
-		Matrix worldMatrix = translationMatrix * rotationMatrix; // Combine translation & rotation
+		Rotation finalRot = Rotation.LookAt( speed >= 0 ? pointInfo.Tangent : pointInfo.Tangent * -1, pointInfo.Up );
+		Transform local = new Transform( pointInfo.Position, finalRot );
 
-		// Transform local position to world position
-		Vector3 worldPos = worldMatrix.Transform( localPos );
-
-		Vector3 newWorldPos = rotationMatrix.Transform( localPos );
-
-		// Transform local rotation to world rotation
-		Rotation worldRot = WorldRotation * localRot;
-
-		return new Transform( newWorldPos + WorldPosition, worldRot );
+		return Transform.Local.ToWorld( local );
 	}
 }

@@ -7,11 +7,18 @@ public sealed partial class PlayerCharacter : Component
 	Vector3 lastTracePos;
 	float railTraceRadius = 20f;
 
+	public TimeUntil _timeUntilCanGrind = 0;
+
 	void TryGetRail()
 	{
-		if ( _activeMovementMode == GetMovementMode<RailGrindMovement>() ) return;
+		if ( _activeMovementMode == GetMovementMode<RailGrindMovement>() || _timeUntilCanGrind > 0 )
+		{
+			lastTracePos = WorldPosition;
+			return;
+		}
 
-		var tr = Scene.Trace.Sphere( railTraceRadius, lastTracePos, WorldPosition )
+
+			var tr = Scene.Trace.Sphere( railTraceRadius, lastTracePos, WorldPosition )
 		.IgnoreGameObject( GameObject )
 		.Run();
 

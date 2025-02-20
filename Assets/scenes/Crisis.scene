@@ -172,7 +172,6 @@
       "__guid": "32800b4a-b653-4b46-a571-7230763d1c74",
       "Flags": 0,
       "Name": "Object",
-      "Rotation": "0,0,-1,0.0000001947072",
       "Tags": "rail",
       "Enabled": true,
       "Components": [

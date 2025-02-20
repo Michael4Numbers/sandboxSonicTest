@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Sandbox.MovementModes;
 using System;
 
 public struct FGroundingStatus
@@ -73,7 +74,7 @@ public sealed partial class PlayerCharacter : Component
 		}
 	}
 
-	public bool IsOnStableGround() => _groundingStatus.bHasGround;
+	public bool IsOnStableGround() => _groundingStatus.bHasGround && _activeMovementMode.GetType() == typeof( GroundMovement );
 
 	public void UnGround()
 	{

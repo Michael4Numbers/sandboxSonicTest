@@ -85,6 +85,7 @@
               "go": "e4c9694b-088e-4c64-91e2-7094a691e172",
               "component_type": "SkinnedModelRenderer"
             },
+            "JumpForce": 1500,
             "OnComponentDestroy": null,
             "OnComponentDisabled": null,
             "OnComponentEnabled": null,
@@ -409,9 +410,6 @@
                 "__type": "Sandbox.MovementModes.RailGrindMovement",
                 "__guid": "4c97e4be-d89b-41f2-a6d7-820030f38a1d",
                 "__enabled": false,
-                "AirAccel": 1,
-                "AirBraking": 1,
-                "AirFriction": 1,
                 "OnComponentDestroy": null,
                 "OnComponentDisabled": null,
                 "OnComponentEnabled": null,

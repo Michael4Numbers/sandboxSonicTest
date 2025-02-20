@@ -62,7 +62,7 @@ public sealed class CameraMovement : Component, IScenePhysicsEvents
 		// Speed based FOV
 		var target = Player.WorldPosition + (Player.WorldRotation.Up * 64);
 		WorldPosition = Vector3.Lerp(WorldPosition, target, 25f * Time.Delta);
-		var speed = Player.GetComponent<Rigidbody>().Velocity.Length;
+		var speed = Player.GetComponent<Rigidbody>(true).Velocity.Length;
 		var targetFov = MapRange( speed, 1000, 3000, 80, 90 ).Clamp( 80, 90 );
 		Camera.FieldOfView = MathX.Lerp(Camera.FieldOfView, targetFov, 5 *  Time.Delta);
 
