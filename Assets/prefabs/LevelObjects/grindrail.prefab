@@ -1,0 +1,149 @@
+{
+  "RootObject": {
+    "__guid": "a79d1d19-711d-40b7-a240-e60538b57e7e",
+    "Flags": 0,
+    "Name": "grindrail",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SplineComponent",
+        "__guid": "6958d922-79d4-4518-ba9a-68aab7625803",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Spline": {
+          "Points": [
+            {
+              "Pos": "0,0,0",
+              "In": "-16.66667,-0,-0",
+              "Out": "16.66667,0,0"
+            },
+            {
+              "Pos": "100,0,0",
+              "In": "-35.99647,0.002713074,-0",
+              "Out": "35.99647,-0.002713074,0"
+            },
+            {
+              "Pos": "215.9788,-0.01627845,0",
+              "In": "-19.3298,0.002713074,-0",
+              "Out": "19.3298,-0.002713074,0"
+            }
+          ]
+        }
+      },
+      {
+        "__type": "Sandbox.SplineModelRenderer",
+        "__guid": "feb2dcfc-320d-40ee-8c77-462f802fe78f",
+        "BodyGroups": 18446744073709551615,
+        "CreateAttachments": false,
+        "FlexFit": true,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/railcollider.vmdl",
+        "ModelOffset": "0,0,0",
+        "ModelRotation": "0,0,0,1",
+        "ModelScale": "15,1,1",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
+        "RenderType": "On",
+        "Spacing": 0,
+        "Spline": {
+          "_type": "component",
+          "component_id": "6958d922-79d4-4518-ba9a-68aab7625803",
+          "go": "a79d1d19-711d-40b7-a240-e60538b57e7e",
+          "component_type": "SplineComponent"
+        },
+        "Tint": "1,1,1,1",
+        "UseRotationMinimizingFrames": true
+      },
+      {
+        "__type": "Sandbox.SplineCollider",
+        "__guid": "a3d74a20-385c-4e9f-bf30-d1c05b2f373c",
+        "FlexFit": true,
+        "Friction": null,
+        "IsTrigger": true,
+        "Model": "models/railcollider.vmdl",
+        "ModelOffset": "0,0,0",
+        "ModelRotation": "0,0,0,1",
+        "ModelScale": "15,0.1,0.1",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnObjectTriggerEnter": null,
+        "OnObjectTriggerExit": null,
+        "OnTriggerEnter": null,
+        "OnTriggerExit": null,
+        "Spacing": 0,
+        "Spline": {
+          "_type": "component",
+          "component_id": "6958d922-79d4-4518-ba9a-68aab7625803",
+          "go": "a79d1d19-711d-40b7-a240-e60538b57e7e",
+          "component_type": "SplineComponent"
+        },
+        "Static": false,
+        "Subdivision": 0,
+        "Surface": null,
+        "SurfaceVelocity": "0,0,0",
+        "UseRotationMinimizingFrames": true
+      },
+      {
+        "__type": "RailGrind",
+        "__guid": "a820fdbe-af59-4237-a1eb-6f7c9a21f862",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      }
+    ],
+    "Children": [],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

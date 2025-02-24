@@ -2,10 +2,12 @@ using Sandbox;
 using Sandbox.MovementModes;
 using System.Numerics;
 
-public class ArmPowerTime : ArmPower
+public class ArmPowerTime : ArmPower, IScenePhysicsEvents
 {
 	[Property] float heightDifference = 15840.0f;
 	bool isToggled;
+	bool isUpdateWaiting;
+	float updateHeight;
 	FilmGrain grain;
 	protected override void OnAwake()
 	{
@@ -19,6 +21,17 @@ public class ArmPowerTime : ArmPower
 	{
 		base.OnUpdate();
 		grain.Intensity = MathX.Lerp( grain.Intensity, 0.0f, 5f * Time.Delta );
+	}
+
+	void IScenePhysicsEvents.PrePhysicsStep()
+	{
+		if ( !isUpdateWaiting ) return;
+		_player.cam.TeleportCam( WorldPosition, WorldPosition - new Vector3( 0, 0, updateHeight ) );
+		_player.WorldPosition += new Vector3( 0, 0, updateHeight );
+		Sound.Play( "MightyLand" );
+		isToggled = !isToggled;
+		canBeActivated = true;
+		isUpdateWaiting = false;
 	}
 
 	public override void PowerOn()
@@ -40,11 +53,8 @@ public class ArmPowerTime : ArmPower
 	{
 		await Task.Delay(200);
 		grain.Intensity = 0.5f;
-		_player.cam.TeleportCam(WorldPosition, WorldPosition - new Vector3( 0, 0, height ) );
-		_player.WorldPosition += new Vector3( 0, 0, height );
-		Sound.Play( "MightyLand" );
-		isToggled = !isToggled;
-		canBeActivated = true;
+		updateHeight = height;
+		isUpdateWaiting = true;
 	}
 
 	public override void PowerOff()

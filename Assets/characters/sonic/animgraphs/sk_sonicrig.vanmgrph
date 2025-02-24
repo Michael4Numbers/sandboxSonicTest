@@ -1745,7 +1745,7 @@
 				{
 					_class = "CRootAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 848.0, -208.0 ]
+					m_vecPosition = [ 944.0, -208.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1927275813

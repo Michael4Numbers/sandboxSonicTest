@@ -171,7 +171,7 @@
     {
       "__guid": "32800b4a-b653-4b46-a571-7230763d1c74",
       "Flags": 0,
-      "Name": "Object",
+      "Name": "Rail",
       "Tags": "rail",
       "Enabled": true,
       "Components": [
@@ -350,6 +350,16 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "a79d1d19-711d-40b7-a240-e60538b57e7e",
+      "Flags": 0,
+      "Name": "Grindrail",
+      "Position": "-48572.81,13315.42,1311.171",
+      "Rotation": "0,0,-1,0.0000001947072",
+      "Enabled": true,
+      "__Prefab": "prefabs/levelobjects/grindrail.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {
